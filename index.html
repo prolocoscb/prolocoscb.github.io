@@ -70,9 +70,9 @@
     }
 
     @keyframes kenBurnsSlow {
-      0% { transform: scale(1.0) translate(0, 0); }
-      50% { transform: scale(1.10) translate(-1.2%, -0.8%); }
-      100% { transform: scale(1.16) translate(0.9%, -1.4%); }
+      0% { transform: scale(1.0) translate3d(0, 0, 0); }
+      50% { transform: scale(1.08) translate3d(-1%, -0.6%, 0); }
+      100% { transform: scale(1.14) translate3d(0.8%, -1.1%, 0); }
     }
 
     .slide-bg {
@@ -81,13 +81,23 @@
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+      z-index: 1;
+      transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform, opacity;
+      backface-visibility: hidden;
     }
 
     .slide-bg.active {
       opacity: 1;
-      animation: kenBurnsSlow 15s ease-out forwards;
+      z-index: 2;
+      animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    /* Mantiene fluido lo zoom anche durante l'uscita in dissolvenza */
+    .slide-bg.exiting {
+      opacity: 0;
+      z-index: 3;
+      animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     }
 
     .cinematic-overlay {
@@ -522,6 +532,7 @@
     let currentIndex = 0;
     let slideInterval = null;
     const SLIDE_DURATION = 7500;
+    const FADE_DURATION = 2200;
     document.documentElement.style.setProperty('--slide-duration', `${SLIDE_DURATION}ms`);
 
     const container = document.getElementById('slideshow-container');
@@ -586,7 +597,7 @@
         subtitleEl.textContent = slidesData[idx].subtitle;
         titleEl.classList.remove('caption-hidden');
         subtitleEl.classList.remove('caption-hidden');
-      }, 260);
+      }, 280);
     }
 
     function goToSlide(idx) {
@@ -594,13 +605,34 @@
       const dots = dotsContainer.querySelectorAll('button');
       if (!slides.length) return;
 
-      slides[currentIndex].classList.remove('active');
+      const nextIndex = (idx + slides.length) % slides.length;
+      if (nextIndex === currentIndex) return;
+
+      const outgoingSlide = slides[currentIndex];
+      const incomingSlide = slides[nextIndex];
+
+      // Pulizia eventuali classi residue su altre slide
+      slides.forEach((s, i) => {
+        if (i !== currentIndex && i !== nextIndex) {
+          s.classList.remove('active', 'exiting');
+        }
+      });
+
+      // Prepara la nuova foto già visibile sotto prima di sfumare quella uscente
+      incomingSlide.classList.remove('exiting', 'active');
+      void incomingSlide.offsetWidth;
+      incomingSlide.classList.add('active');
+
+      // La foto uscente continua il movimento mentre dissolve sopra
+      outgoingSlide.classList.remove('active');
+      outgoingSlide.classList.add('exiting');
+
+      setTimeout(() => {
+        outgoingSlide.classList.remove('exiting');
+      }, FADE_DURATION + 100);
+
       updateDotVisual(dots[currentIndex], false);
-
-      currentIndex = (idx + slides.length) % slides.length;
-
-      void slides[currentIndex].offsetWidth;
-      slides[currentIndex].classList.add('active');
+      currentIndex = nextIndex;
       updateDotVisual(dots[currentIndex], true);
 
       updateCaption(currentIndex);
@@ -690,3 +722,4 @@
   </script>
 </body>
 </html>
+```
