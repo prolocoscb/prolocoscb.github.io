@@ -6,10 +6,9 @@
   <title>Pro Loco Santa Cristina e Bissone</title>
   <meta name="description" content="Sito ufficiale della Pro Loco di Santa Cristina e Bissone (PV)" />
 
-  <!-- Google Fonts: Cormorant Garamond & Montserrat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bunny Fonts (Alternativa Europea GDPR-compliant senza tracciamento IP) -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,500,600,700,400i,600i|montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -93,7 +92,6 @@
       animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
     }
 
-    /* Mantiene fluido lo zoom anche durante l'uscita in dissolvenza */
     .slide-bg.exiting {
       opacity: 0;
       z-index: 3;
@@ -141,7 +139,6 @@
       transform: translateY(0) scale(0.96);
     }
 
-    /* Riflesso luminoso periodico sul pulsante principale Scrivici */
     @keyframes btnShimmer {
       0%, 68% { transform: translateX(-140%) skewX(-20deg); }
       100% { transform: translateX(260%) skewX(-20deg); }
@@ -158,7 +155,6 @@
       pointer-events: none;
     }
 
-    /* Popup stile Apple con fisica a molla e ingresso a cascata dei campi */
     .apple-backdrop {
       background: rgba(0, 8, 22, 0);
       backdrop-filter: blur(0px);
@@ -233,7 +229,6 @@
       box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.22);
     }
 
-    /* Ingresso fluido elementi principali */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
       to { opacity: 1; transform: translateY(0); }
@@ -243,7 +238,6 @@
     .delay-340 { animation-delay: 0.48s; opacity: 0; }
     .delay-460 { animation-delay: 0.62s; opacity: 0; }
 
-    /* Effetto maschera tipografica sul titolo principale */
     @keyframes titleReveal {
       from { opacity: 0; transform: translateY(105%); }
       to { opacity: 1; transform: translateY(0); }
@@ -263,7 +257,6 @@
       opacity: 0;
     }
 
-    /* Apertura simmetrica del divisore centrale */
     @keyframes expandLine {
       from { transform: scaleX(0); opacity: 0; }
       to { transform: scaleX(1); opacity: 1; }
@@ -287,7 +280,6 @@
       opacity: 0;
     }
 
-    /* Avanzamento progressivo dell'indicatore della slide attiva */
     @keyframes dotProgress {
       from { transform: scaleX(0); }
       to { transform: scaleX(1); }
@@ -297,7 +289,6 @@
       animation: dotProgress var(--slide-duration, 7500ms) linear forwards;
     }
 
-    /* Transizione morbida delle didascalie */
     .caption-transition {
       transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -343,7 +334,6 @@
     <!-- Header -->
     <header class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 animate-fade-up">
       <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
-        <!-- Logo Circolare Blu Reale -->
         <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border border-white/30 shadow-lg bg-[#0014A8] flex items-center justify-center transition-transform duration-300 hover:scale-105">
           <img src="logo.jpg" alt="Logo Pro Loco Santa Cristina e Bissone" class="w-full h-full object-cover scale-105" />
         </div>
@@ -541,8 +531,8 @@
           Pro Loco Santa Cristina e Bissone, con sede in 27010 Santa Cristina e Bissone (PV) — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
         </p>
         <p>
-          <strong class="font-semibold text-white">2. Tipologia di dati raccolti e finalità:</strong><br />
-          Questo sito non utilizza cookie di profilazione né strumenti di tracciamento pubblicitario. Attraverso il modulo <em>“Scrivici”</em> vengono raccolti esclusivamente i dati volontariamente inseriti dall’utente (nome, indirizzo email, motivo del contatto e messaggio) al solo fine di rispondere alle richieste, valutare proposte o gestire la disponibilità dei volontari.
+          <strong class="font-semibold text-white">2. Tipologia di dati raccolti, cookie e font:</strong><br />
+          Questo sito <strong>non installa cookie</strong> di alcun tipo (né tecnici, né analitici, né di profilazione) e non utilizza Google Fonts: i caratteri tipografici sono erogati tramite <em>Bunny Fonts</em> (infrastruttura europea conforme al GDPR senza tracciamento degli indirizzi IP). Attraverso il modulo <em>“Scrivici”</em> vengono raccolti esclusivamente i dati volontariamente inseriti dall’utente (nome, indirizzo email, motivo del contatto e messaggio) al solo fine di rispondere alle richieste, valutare proposte o gestire la disponibilità dei volontari.
         </p>
         <p>
           <strong class="font-semibold text-white">3. Base giuridica e modalità di invio:</strong><br />
@@ -666,19 +656,16 @@
       const outgoingSlide = slides[currentIndex];
       const incomingSlide = slides[nextIndex];
 
-      // Pulizia eventuali classi residue su altre slide
       slides.forEach((s, i) => {
         if (i !== currentIndex && i !== nextIndex) {
           s.classList.remove('active', 'exiting');
         }
       });
 
-      // Prepara la nuova foto già visibile sotto prima di sfumare quella uscente
       incomingSlide.classList.remove('exiting', 'active');
       void incomingSlide.offsetWidth;
       incomingSlide.classList.add('active');
 
-      // La foto uscente continua il movimento mentre dissolve sopra
       outgoingSlide.classList.remove('active');
       outgoingSlide.classList.add('exiting');
 
@@ -814,6 +801,4 @@
 </html>
 ```
 
-### Cosa ho perfezionato nel carosello:
-* **Crossfade senza scatti:** quando scatta il cambio foto, quella nuova è già pronta e visibile sotto (`z-index: 2`), mentre quella precedente (`z-index: 3`, classe `.exiting`) continua lo zoom lento mentre dissolve sopra, eliminando lo scatto di ritorno a `scale(1.0)`.
-* **Accelerazione GPU (`translate3d` e `backface-visibility: hidden`):** rende il movimento *Ken Burns* più morbido anche su smartphone e iPad.
+Ora non c'è più alcuna chiamata ai server di Google (`fonts.googleapis.com` o `fonts.gstatic.com`), i font restano identici (*Cormorant Garamond* + *Montserrat*) tramite **Bunny Fonts** (europeo, zero tracciamento IP) e il sito è allineato al GDPR senza bisogno di cookie banner.
