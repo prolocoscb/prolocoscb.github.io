@@ -433,7 +433,13 @@
       <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
         <div id="slide-dots" class="flex items-center gap-2"></div>
         <span class="text-[11px] text-white/55 hidden md:inline">•</span>
-        <span class="text-[10px] sm:text-[11px] text-white/75 tracking-wider text-center">© 2026 Pro Loco Santa Cristina e Bissone</span>
+        <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] sm:text-[11px] text-white/75 tracking-wider text-center">
+          <span>© 2026 Pro Loco Santa Cristina e Bissone</span>
+          <span class="text-white/40">•</span>
+          <button type="button" onclick="togglePrivacyPopup(true)" class="underline decoration-white/35 hover:text-platano-light hover:decoration-platano-light transition cursor-pointer">
+            Privacy Policy
+          </button>
+        </div>
       </div>
     </footer>
   </div>
@@ -489,6 +495,16 @@
                     class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm resize-y"></textarea>
         </div>
 
+        <div class="popup-stagger popup-stagger-4 pt-0.5">
+          <label class="flex items-start gap-2.5 cursor-pointer text-[11px] text-white/80 leading-snug select-none">
+            <input id="privacy-consent" name="Consenso_Privacy" type="checkbox" required
+                   class="mt-0.5 h-3.5 w-3.5 rounded border-white/30 bg-navy-dark accent-platano-light shrink-0 cursor-pointer" />
+            <span>
+              Ho letto l’<button type="button" onclick="togglePrivacyPopup(true)" class="text-platano-light underline hover:text-white transition cursor-pointer">Informativa Privacy</button> e acconsento al trattamento dei dati inseriti per ricevere risposta dal direttivo.
+            </span>
+          </label>
+        </div>
+
         <div class="popup-stagger popup-stagger-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
           <span class="text-[11px] text-white/60">Destinatario: prolocoscb.pv@proton.me</span>
           <button type="submit" id="submit-contact-btn"
@@ -503,6 +519,45 @@
       <div class="mt-5 pt-3.5 border-t border-white/15 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/65">
         <span>27010 Santa Cristina e Bissone (PV)</span>
         <span>Lombardia • Italia</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Informativa Privacy (Art. 13 GDPR) -->
+  <div id="privacy-popup" class="apple-backdrop fixed inset-0 z-[60] hidden items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+    <div class="apple-popup-card rounded-2xl max-w-xl w-full p-5 sm:p-7 relative text-white my-auto text-left">
+      <button type="button" onclick="togglePrivacyPopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi informativa">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Trasparenza &amp; GDPR</span>
+      <h2 id="privacy-title" class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-3 pr-8">Informativa sulla Privacy</h2>
+
+      <div class="space-y-3 text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-[60vh] overflow-y-auto pr-1">
+        <p>
+          <strong class="font-semibold text-white">1. Titolare del trattamento:</strong><br />
+          Pro Loco Santa Cristina e Bissone, con sede in 27010 Santa Cristina e Bissone (PV) — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
+        </p>
+        <p>
+          <strong class="font-semibold text-white">2. Tipologia di dati raccolti e finalità:</strong><br />
+          Questo sito non utilizza cookie di profilazione né strumenti di tracciamento pubblicitario. Attraverso il modulo <em>“Scrivici”</em> vengono raccolti esclusivamente i dati volontariamente inseriti dall’utente (nome, indirizzo email, motivo del contatto e messaggio) al solo fine di rispondere alle richieste, valutare proposte o gestire la disponibilità dei volontari.
+        </p>
+        <p>
+          <strong class="font-semibold text-white">3. Base giuridica e modalità di invio:</strong><br />
+          Il trattamento si basa sul consenso esplicito dell’interessato (art. 6, par. 1, lett. a del Regolamento UE 2016/679). L’inoltro tecnico del modulo verso la casella email della Pro Loco avviene tramite il servizio <em>FormSubmit</em>; i dati non vengono ceduti a terzi né utilizzati per finalità commerciali.
+        </p>
+        <p>
+          <strong class="font-semibold text-white">4. Conservazione e diritti dell’interessato:</strong><br />
+          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile richiedere l’accesso, la rettifica o la cancellazione dei propri dati scrivendo a <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
+        </p>
+      </div>
+
+      <div class="mt-5 pt-3.5 border-t border-white/15 flex items-center justify-end">
+        <button type="button" onclick="togglePrivacyPopup(false)" class="cta-btn bg-white/15 hover:bg-white/25 text-white font-medium text-xs px-5 py-2 rounded-full transition cursor-pointer">
+          Ho capito
+        </button>
       </div>
     </div>
   </div>
@@ -645,6 +700,7 @@
     }
 
     let closePopupTimer = null;
+    let closePrivacyTimer = null;
 
     function toggleWritePopup(show) {
       const popup = document.getElementById('write-popup');
@@ -673,12 +729,46 @@
       }
     }
 
+    function togglePrivacyPopup(show) {
+      const popup = document.getElementById('privacy-popup');
+      if (closePrivacyTimer) {
+        clearTimeout(closePrivacyTimer);
+        closePrivacyTimer = null;
+      }
+
+      if (show) {
+        popup.classList.remove('hidden', 'is-closing');
+        popup.classList.add('flex');
+        void popup.offsetWidth;
+        requestAnimationFrame(() => popup.classList.add('is-open'));
+      } else {
+        if (popup.classList.contains('hidden')) return;
+        popup.classList.remove('is-open');
+        popup.classList.add('is-closing');
+        closePrivacyTimer = setTimeout(() => {
+          popup.classList.add('hidden');
+          popup.classList.remove('flex', 'is-closing');
+        }, 300);
+      }
+    }
+
     document.getElementById('write-popup').addEventListener('click', (e) => {
       if (e.target.id === 'write-popup') toggleWritePopup(false);
     });
 
+    document.getElementById('privacy-popup').addEventListener('click', (e) => {
+      if (e.target.id === 'privacy-popup') togglePrivacyPopup(false);
+    });
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') toggleWritePopup(false);
+      if (e.key === 'Escape') {
+        const privacyPopup = document.getElementById('privacy-popup');
+        if (!privacyPopup.classList.contains('hidden')) {
+          togglePrivacyPopup(false);
+        } else {
+          toggleWritePopup(false);
+        }
+      }
     });
 
     const contactForm = document.getElementById('proloco-contact-form');
@@ -723,3 +813,7 @@
 </body>
 </html>
 ```
+
+### Cosa ho perfezionato nel carosello:
+* **Crossfade senza scatti:** quando scatta il cambio foto, quella nuova è già pronta e visibile sotto (`z-index: 2`), mentre quella precedente (`z-index: 3`, classe `.exiting`) continua lo zoom lento mentre dissolve sopra, eliminando lo scatto di ritorno a `scale(1.0)`.
+* **Accelerazione GPU (`translate3d` e `backface-visibility: hidden`):** rende il movimento *Ken Burns* più morbido anche su smartphone e iPad.
