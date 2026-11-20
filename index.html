@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pro Loco Santa Cristina e Bissone — Nuovo Direttivo</title>
   <meta name="description" content="Sito ufficiale della Pro Loco di Santa Cristina e Bissone (PV). Nuovo direttivo insediato: presto online con il calendario eventi e le iniziative del territorio." />
-  
+
   <!-- Google Fonts: Cormorant Garamond & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -145,7 +145,7 @@
 
   <!-- Contenitore Principale -->
   <div class="relative z-20 flex flex-col justify-between h-full w-full px-6 py-6 sm:px-12 sm:py-9 max-w-7xl mx-auto">
-    
+
     <!-- Header -->
     <header class="flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-up">
       <div class="flex items-center gap-3.5">
@@ -185,7 +185,7 @@
       <p class="animate-fade-up delay-150 text-xs sm:text-sm uppercase tracking-[0.35em] text-platano-gold font-medium mb-3 sm:mb-4">
         Tradizione • Comunità • Territorio
       </p>
-      
+
       <h1 class="animate-fade-up delay-150 font-serif text-4xl sm:text-6xl md:text-7xl font-semibold leading-[1.08] tracking-tight text-white drop-shadow-md">
         Santa Cristina <span class="italic font-normal text-white/90">&amp;</span> Bissone
       </h1>
@@ -228,7 +228,7 @@
       </div>
     </main>
 
-    <!-- Footer: Didascalia Storica del Luogo & Indicatori Slide -->
+    <!-- Footer: Didascalia Vista Aerea & Indicatori Slide -->
     <footer class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10 animate-fade-up delay-450">
       <div class="flex items-center gap-3 text-center sm:text-left">
         <svg class="w-4 h-4 text-platano-light shrink-0 hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -297,34 +297,22 @@
   </div>
 
   <script>
-    // Tappe storiche e paesaggistiche di Santa Cristina e Bissone.
-    // Se carichi su GitHub file locali chiamati foto1.jpg, foto2.jpg, foto3.jpg, foto4.jpg,
-    // verranno caricati automaticamente al posto delle immagini di fallback.
     const slidesData = [
       {
-        localFile: 'foto1.jpg',
-        fallbackUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=85',
-        title: 'Ex Monastero Benedettino e Bifora Longobarda',
-        subtitle: 'Antico cenobio fondato in età longobarda, custode di capitelli dell’VIII secolo'
+        image: 'IMG_0119.jpeg',
+        title: 'Bissone vista dall’alto',
+        subtitle: 'Veduta aerea tra campi coltivati, alberature e corti storiche di Bissone'
       },
       {
-        localFile: 'foto2.jpg',
-        fallbackUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=85',
-        title: 'La Via Francigena — XL Tappa di Sigerico',
-        subtitle: 'Storico crocevia di pellegrini lungo l’antica direttrice tra Pavia e il Po'
+        image: 'IMG_0120.jpeg',
+        title: 'Santa Cristina dall’alto',
+        subtitle: 'Una panoramica su Santa Cristina'
       },
       {
-        localFile: 'foto3.jpg',
-        fallbackUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2000&q=85',
-        title: 'Il Platano Monumentale di Santa Cristina',
-        subtitle: 'Patrimonio naturale e simbolo identitario della nostra comunità pavese'
+        image: 'IMG_0124.jpeg',
+        title: 'Il Centro di Santa Cristina',
+        subtitle: 'Le vie del paese, il campanile e il verde della campagna circostante'
       },
-      {
-        localFile: 'foto4.jpg',
-        fallbackUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=85',
-        title: 'Terrazzi Fluviali e Campagna tra Santa Cristina e Bissone',
-        subtitle: 'I colori e i profumi della pianura alluvionale del Basso Pavese'
-      }
     ];
 
     let currentIndex = 0;
@@ -336,25 +324,14 @@
     const titleEl = document.getElementById('slide-title');
     const subtitleEl = document.getElementById('slide-subtitle');
 
-    function resolveImageUrl(slide) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(slide.localFile);
-        img.onerror = () => resolve(slide.fallbackUrl);
-        img.src = slide.localFile;
-      });
-    }
-
-    async function renderSlides() {
+    function renderSlides() {
       container.innerHTML = '';
       dotsContainer.innerHTML = '';
-
-      const resolvedUrls = await Promise.all(slidesData.map(resolveImageUrl));
 
       slidesData.forEach((slide, idx) => {
         const div = document.createElement('div');
         div.className = `slide-bg ${idx === 0 ? 'active' : ''}`;
-        div.style.backgroundImage = `url('${resolvedUrls[idx]}')`;
+        div.style.backgroundImage = `url('${slide.image}')`;
         container.appendChild(div);
 
         const dot = document.createElement('button');
@@ -430,7 +407,8 @@
       if (e.target.id === 'contact-modal') toggleContactModal(false);
     });
 
-    renderSlides().then(() => restartTimer());
+    renderSlides();
+    restartTimer();
   </script>
 </body>
 </html>
