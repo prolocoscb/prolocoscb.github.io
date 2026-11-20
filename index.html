@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Pro Loco Santa Cristina e Bissone</title>
   <meta name="description" content="Sito ufficiale della Pro Loco di Santa Cristina e Bissone (PV). Nuovo direttivo insediato: presto online con il calendario eventi e le iniziative del territorio." />
 
@@ -41,12 +41,39 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      height: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
       width: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       background-color: #00112B;
       color: #ffffff;
       font-family: 'Montserrat', sans-serif;
+    }
+
+    @media (min-width: 768px) and (min-height: 680px) {
+      html, body {
+        height: 100dvh;
+        overflow: hidden;
+      }
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-top: max(1.1rem, env(safe-area-inset-top));
+      padding-bottom: max(1.1rem, env(safe-area-inset-bottom));
+      padding-left: max(1.15rem, env(safe-area-inset-left));
+      padding-right: max(1.15rem, env(safe-area-inset-right));
+    }
+
+    @media (min-width: 640px) {
+      .app-shell {
+        padding-top: max(1.75rem, env(safe-area-inset-top));
+        padding-bottom: max(1.75rem, env(safe-area-inset-bottom));
+        padding-left: max(2.5rem, env(safe-area-inset-left));
+        padding-right: max(2.5rem, env(safe-area-inset-right));
+      }
     }
 
     @keyframes kenBurnsSlow {
@@ -70,7 +97,6 @@
       animation: kenBurnsSlow 16s ease-out forwards;
     }
 
-    /* Overlay più profondo e contrastato per garantire leggibilità su ogni zona chiara delle foto */
     .cinematic-overlay {
       background:
         radial-gradient(circle at 50% 48%, rgba(0, 17, 43, 0.62) 0%, rgba(0, 17, 43, 0.84) 68%, rgba(0, 11, 28, 0.96) 100%),
@@ -83,6 +109,11 @@
 
     .body-text-shadow {
       text-shadow: 0 2px 14px rgba(0, 11, 28, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-title-line {
+      font-size: clamp(2.15rem, 6.4vw, 4.5rem);
+      line-height: 1.07;
     }
 
     .glass-pill {
@@ -154,12 +185,12 @@
   </div>
 
   <!-- Contenitore Principale -->
-  <div class="relative z-20 flex flex-col justify-between h-full w-full px-6 py-6 sm:px-12 sm:py-9 max-w-7xl mx-auto">
+  <div class="app-shell relative z-20 flex flex-col justify-between gap-6 w-full max-w-7xl mx-auto">
 
     <!-- Header -->
-    <header class="flex flex-col sm:flex-row items-center justify-between gap-4 animate-fade-up">
-      <div class="flex items-center gap-3.5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-navy/95 border border-white/25 flex items-center justify-center shadow-lg p-1.5 backdrop-blur-md">
+    <header class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 animate-fade-up">
+      <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
+        <div class="w-11 h-11 sm:w-14 sm:h-14 shrink-0 rounded-full bg-navy/95 border border-white/25 flex items-center justify-center shadow-lg p-1.5 backdrop-blur-md">
           <svg viewBox="0 0 100 100" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="46" stroke="#34A853" stroke-width="1.5" stroke-opacity="0.65"/>
             <path d="M50 16 L66 38 H57 L71 57 H59 L74 75 H26 L41 57 H29 L43 38 H34 L50 16 Z" fill="url(#platanoGrad)"/>
@@ -174,69 +205,68 @@
           </svg>
         </div>
         <div class="text-center sm:text-left body-text-shadow">
-          <span class="block text-[10px] sm:text-xs uppercase tracking-[0.28em] text-platano-light font-semibold">Provincia di Pavia</span>
-          <span class="font-serif text-lg sm:text-xl font-semibold tracking-wide text-white">Pro Loco Santa Cristina e Bissone</span>
+          <span class="block text-[10px] sm:text-xs uppercase tracking-[0.24em] sm:tracking-[0.28em] text-platano-light font-semibold">Provincia di Pavia</span>
+          <span class="font-serif text-base sm:text-xl font-semibold tracking-wide text-white leading-tight block">Pro Loco Santa Cristina e Bissone</span>
         </div>
       </div>
 
       <!-- Badge Stato Direttivo -->
-      <div class="glass-pill px-4 py-2 rounded-full flex items-center gap-2.5">
-        <span class="relative flex h-2.5 w-2.5 status-dot">
-          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-platano-light"></span>
+      <div class="glass-pill px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full flex items-center justify-center gap-2 sm:gap-2.5 max-w-full">
+        <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0 status-dot">
+          <span class="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-platano-light"></span>
         </span>
-        <span class="text-[11px] sm:text-xs font-medium tracking-wider uppercase text-white">
-          Nuovo Direttivo Insediato • Sito in allestimento
+        <span class="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-white text-center leading-snug">
+          Sito in allestimento
         </span>
       </div>
     </header>
 
     <!-- Hero Centrale -->
-    <main class="my-auto text-center max-w-4xl mx-auto px-2">
-      <p class="animate-fade-up delay-150 text-xs sm:text-sm uppercase tracking-[0.35em] text-platano-gold font-semibold mb-3 sm:mb-4 body-text-shadow">
+    <main class="my-auto text-center w-full max-w-4xl mx-auto px-1 sm:px-4 py-2">
+      <p class="animate-fade-up delay-150 text-[11px] sm:text-sm uppercase tracking-[0.26em] sm:tracking-[0.35em] text-platano-gold font-semibold mb-2.5 sm:mb-4 body-text-shadow">
         Tradizione • Comunità • Territorio
       </p>
 
-      <!-- Titolo uniformato: stesso font Cormorant Garamond, "Pro Loco" su prima riga e "Santa Cristina & Bissone" sotto -->
       <h1 class="animate-fade-up delay-150 font-serif font-semibold tracking-tight text-white hero-text-shadow">
-        <span class="block text-4xl sm:text-6xl md:text-7xl leading-[1.06]">
+        <span class="block hero-title-line">
           Pro Loco
         </span>
-        <span class="block text-4xl sm:text-6xl md:text-7xl leading-[1.08] mt-1">
+        <span class="block hero-title-line mt-0.5 sm:mt-1">
           Santa Cristina <span class="italic font-normal text-white/95">&amp;</span> Bissone
         </span>
       </h1>
 
-      <div class="animate-fade-up delay-300 flex items-center justify-center gap-3 my-5 sm:my-6">
-        <span class="h-[1px] w-14 sm:w-24 bg-gradient-to-r from-transparent to-platano-light"></span>
-        <span class="w-2 h-2 rotate-45 bg-platano-gold shadow"></span>
-        <span class="h-[1px] w-14 sm:w-24 bg-gradient-to-l from-transparent to-platano-light"></span>
+      <div class="animate-fade-up delay-300 flex items-center justify-center gap-3 my-4 sm:my-6">
+        <span class="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-platano-light"></span>
+        <span class="w-2 h-2 rotate-45 bg-platano-gold shadow shrink-0"></span>
+        <span class="h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-platano-light"></span>
       </div>
 
-      <p class="animate-fade-up delay-300 text-sm sm:text-base md:text-lg text-white font-normal leading-relaxed max-w-2xl mx-auto body-text-shadow">
-        Un nuovo capitolo per il nostro paese. Stiamo preparando il calendario delle prossime iniziative culturali, gastronomiche e di valorizzazione del territorio.
+      <p class="animate-fade-up delay-300 text-xs sm:text-base md:text-lg text-white font-normal leading-relaxed max-w-2xl mx-auto body-text-shadow px-1">
+        Stiamo preparando il calendario delle prossime iniziative culturali, gastronomiche e di valorizzazione del territorio.
       </p>
 
       <!-- Call to Action: Instagram, Facebook e Contatto Email -->
-      <div class="animate-fade-up delay-450 mt-7 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+      <div class="animate-fade-up delay-450 mt-6 sm:mt-9 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
         <a href="https://www.instagram.com/prolocoscb" target="_blank" rel="noopener noreferrer"
-           class="glass-pill hover:bg-platano-dark/65 hover:border-platano-light transition-all duration-300 px-5 py-2.5 rounded-full flex items-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
-          <svg class="w-4 h-4 text-platano-light group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+           class="glass-pill hover:bg-platano-dark/65 hover:border-platano-light transition-all duration-300 px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
+          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
           <span>Instagram</span>
         </a>
 
         <a href="https://www.facebook.com/prolocoscb" target="_blank" rel="noopener noreferrer"
-           class="glass-pill hover:bg-platano-dark/65 hover:border-platano-light transition-all duration-300 px-5 py-2.5 rounded-full flex items-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
-          <svg class="w-4 h-4 text-platano-light group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+           class="glass-pill hover:bg-platano-dark/65 hover:border-platano-light transition-all duration-300 px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
+          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
             <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
           </svg>
           <span>Facebook</span>
         </a>
 
         <button onclick="toggleContactModal(true)"
-           class="bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-lg shadow-black/40 border border-white/15 transition-all duration-300 px-6 py-2.5 rounded-full flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+           class="bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-lg shadow-black/40 border border-white/15 transition-all duration-300 px-6 py-2.5 rounded-full flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
           <span>Scrivici</span>
@@ -245,8 +275,8 @@
     </main>
 
     <!-- Footer: Didascalia Vista Aerea & Indicatori Slide -->
-    <footer class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/15 animate-fade-up delay-450 body-text-shadow">
-      <div class="flex items-center gap-3 text-center sm:text-left">
+    <footer class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-450 body-text-shadow">
+      <div class="flex items-center gap-2.5 sm:gap-3 text-center sm:text-left">
         <svg class="w-4 h-4 text-platano-light shrink-0 hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -257,25 +287,25 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
         <div id="slide-dots" class="flex items-center gap-2"></div>
         <span class="text-[11px] text-white/55 hidden md:inline">•</span>
-        <span class="text-[11px] text-white/75 tracking-wider hidden md:inline">© 2026 Pro Loco Santa Cristina e Bissone</span>
+        <span class="text-[10px] sm:text-[11px] text-white/75 tracking-wider text-center">© 2026 Pro Loco Santa Cristina e Bissone</span>
       </div>
     </footer>
   </div>
 
   <!-- Modale Contatti -->
-  <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy-dark/85 backdrop-blur-md transition-opacity duration-300">
-    <div class="glass-card rounded-2xl max-w-md w-full p-6 sm:p-8 relative text-white">
-      <button onclick="toggleContactModal(false)" class="absolute top-4 right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition cursor-pointer" aria-label="Chiudi">
+  <div id="contact-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy-dark/85 backdrop-blur-md transition-opacity duration-300 overflow-y-auto">
+    <div class="glass-card rounded-2xl max-w-md w-full p-5 sm:p-8 relative text-white my-auto">
+      <button onclick="toggleContactModal(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition cursor-pointer" aria-label="Chiudi">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
 
       <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Contatti Diretti</span>
-      <h2 class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-2">Parla con il Direttivo</h2>
+      <h2 class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-2 pr-6">Parla con il Direttivo</h2>
       <p class="text-xs sm:text-sm text-white/80 font-light leading-relaxed mb-5">
         Hai idee, proposte di collaborazione o vuoi entrare a far parte dei volontari della Pro Loco di Santa Cristina e Bissone? Scrivici via email o sui social.
       </p>
@@ -298,14 +328,14 @@
             <span class="block text-[10px] uppercase tracking-widest text-white/60">Social Ufficiali</span>
             <span class="text-xs sm:text-sm font-medium text-white">@prolocoscb</span>
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 shrink-0">
             <a href="https://www.instagram.com/prolocoscb" target="_blank" rel="noopener noreferrer" class="text-[11px] bg-white/15 hover:bg-platano-light hover:text-navy-dark px-2.5 py-1.5 rounded-lg transition font-medium">IG</a>
             <a href="https://www.facebook.com/prolocoscb" target="_blank" rel="noopener noreferrer" class="text-[11px] bg-white/15 hover:bg-platano-light hover:text-navy-dark px-2.5 py-1.5 rounded-lg transition font-medium">FB</a>
           </div>
         </div>
       </div>
 
-      <div class="mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-[11px] text-white/65">
+      <div class="mt-6 pt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/65">
         <span>27010 Santa Cristina e Bissone (PV)</span>
         <span>Lombardia • Italia</span>
       </div>
