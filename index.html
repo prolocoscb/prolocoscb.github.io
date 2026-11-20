@@ -51,13 +51,6 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    @media (min-width: 768px) and (min-height: 680px) {
-      html, body {
-        height: 100dvh;
-        overflow: hidden;
-      }
-    }
-
     .app-shell {
       min-height: 100vh;
       min-height: 100dvh;
@@ -78,8 +71,8 @@
 
     @keyframes kenBurnsSlow {
       0% { transform: scale(1.0) translate(0, 0); }
-      50% { transform: scale(1.08) translate(-1%, -0.8%); }
-      100% { transform: scale(1.13) translate(0.8%, -1.2%); }
+      50% { transform: scale(1.10) translate(-1.2%, -0.8%); }
+      100% { transform: scale(1.16) translate(0.9%, -1.4%); }
     }
 
     .slide-bg {
@@ -88,18 +81,18 @@
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 2.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transition: opacity 1.8s cubic-bezier(0.25, 0.1, 0.25, 1);
       will-change: transform, opacity;
     }
 
     .slide-bg.active {
       opacity: 1;
-      animation: kenBurnsSlow 16s ease-out forwards;
+      animation: kenBurnsSlow 15s ease-out forwards;
     }
 
     .cinematic-overlay {
       background:
-        radial-gradient(circle at 50% 48%, rgba(0, 17, 43, 0.65) 0%, rgba(0, 17, 43, 0.86) 68%, rgba(0, 11, 28, 0.96) 100%),
+        radial-gradient(circle at 50% 48%, rgba(0, 17, 43, 0.62) 0%, rgba(0, 17, 43, 0.85) 68%, rgba(0, 11, 28, 0.96) 100%),
         linear-gradient(180deg, rgba(0, 11, 28, 0.86) 0%, rgba(0, 28, 70, 0.45) 45%, rgba(0, 11, 28, 0.95) 100%);
     }
 
@@ -113,7 +106,7 @@
 
     .hero-title-line {
       font-size: clamp(2.15rem, 6.4vw, 4.5rem);
-      line-height: 1.07;
+      line-height: 1.08;
     }
 
     .glass-pill {
@@ -122,21 +115,101 @@
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.22);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .glass-popup {
-      background: rgba(0, 17, 43, 0.90);
+    .cta-btn {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, filter 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+    }
+    .cta-btn:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    /* Riflesso luminoso periodico sul pulsante principale Scrivici */
+    @keyframes btnShimmer {
+      0%, 68% { transform: translateX(-140%) skewX(-20deg); }
+      100% { transform: translateX(260%) skewX(-20deg); }
+    }
+    .btn-shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+      animation: btnShimmer 4.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* Popup stile Apple con fisica a molla e ingresso a cascata dei campi */
+    .apple-backdrop {
+      background: rgba(0, 8, 22, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      opacity: 0;
+      transition:
+        opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        backdrop-filter 0.42s cubic-bezier(0.32, 0.72, 0, 1),
+        -webkit-backdrop-filter 0.42s cubic-bezier(0.32, 0.72, 0, 1),
+        background-color 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .apple-backdrop.is-open {
+      background: rgba(0, 8, 22, 0.74);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.85);
+      opacity: 1;
     }
 
+    .apple-popup-card {
+      background: rgba(0, 17, 43, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 36px 70px -14px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      opacity: 0;
+      transform: scale(0.86) translateY(24px);
+      transition:
+        transform 0.52s cubic-bezier(0.18, 1.22, 0.24, 1),
+        opacity 0.30s cubic-bezier(0.32, 0.72, 0, 1);
+      will-change: transform, opacity;
+    }
+
+    .apple-backdrop.is-open .apple-popup-card {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .apple-backdrop.is-closing .apple-popup-card {
+      opacity: 0;
+      transform: scale(0.92) translateY(14px);
+      transition:
+        transform 0.28s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.24s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .popup-stagger {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.38s ease, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-backdrop.is-open .popup-stagger-1 { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
+    .apple-backdrop.is-open .popup-stagger-2 { opacity: 1; transform: translateY(0); transition-delay: 0.14s; }
+    .apple-backdrop.is-open .popup-stagger-3 { opacity: 1; transform: translateY(0); transition-delay: 0.20s; }
+    .apple-backdrop.is-open .popup-stagger-4 { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+
     .form-input {
-      background: rgba(0, 28, 70, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 28, 70, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.20);
       color: #ffffff;
-      transition: border-color 0.25s ease, background-color 0.25s ease;
+      transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
     }
 
     .form-input::placeholder {
@@ -146,28 +219,87 @@
     .form-input:focus {
       outline: none;
       border-color: #34A853;
-      background: rgba(0, 28, 70, 0.92);
+      background: rgba(0, 28, 70, 0.90);
+      box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.22);
     }
 
+    /* Ingresso fluido elementi principali */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(22px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .animate-fade-up { animation: fadeUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    .delay-150 { animation-delay: 0.15s; opacity: 0; }
-    .delay-300 { animation-delay: 0.30s; opacity: 0; }
-    .delay-450 { animation-delay: 0.45s; opacity: 0; }
+    .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 0.12s; opacity: 0; }
+    .delay-340 { animation-delay: 0.48s; opacity: 0; }
+    .delay-460 { animation-delay: 0.62s; opacity: 0; }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+    /* Effetto maschera tipografica sul titolo principale */
+    @keyframes titleReveal {
+      from { opacity: 0; transform: translateY(105%); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .animate-pop-in { animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .title-mask {
+      overflow: hidden;
+      padding-bottom: 0.08em;
+    }
+    .title-reveal-1 {
+      display: block;
+      animation: titleReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+      opacity: 0;
+    }
+    .title-reveal-2 {
+      display: block;
+      animation: titleReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.32s forwards;
+      opacity: 0;
+    }
+
+    /* Apertura simmetrica del divisore centrale */
+    @keyframes expandLine {
+      from { transform: scaleX(0); opacity: 0; }
+      to { transform: scaleX(1); opacity: 1; }
+    }
+    @keyframes spinDiamond {
+      from { opacity: 0; transform: rotate(0deg) scale(0.4); }
+      to { opacity: 1; transform: rotate(45deg) scale(1); }
+    }
+    .divider-line-left {
+      transform-origin: right center;
+      animation: expandLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+      opacity: 0;
+    }
+    .divider-line-right {
+      transform-origin: left center;
+      animation: expandLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+      opacity: 0;
+    }
+    .divider-diamond {
+      animation: spinDiamond 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
+      opacity: 0;
+    }
+
+    /* Avanzamento progressivo dell'indicatore della slide attiva */
+    @keyframes dotProgress {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+    .dot-fill {
+      transform-origin: left center;
+      animation: dotProgress var(--slide-duration, 7500ms) linear forwards;
+    }
+
+    /* Transizione morbida delle didascalie */
+    .caption-transition {
+      transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .caption-hidden {
+      opacity: 0;
+      transform: translateY(6px);
+    }
 
     @keyframes pulseRing {
-      0% { transform: scale(0.85); opacity: 0.85; }
-      70% { transform: scale(2.1); opacity: 0; }
-      100% { transform: scale(2.1); opacity: 0; }
+      0% { transform: scale(0.9); opacity: 0.95; }
+      75% { transform: scale(2.4); opacity: 0; }
+      100% { transform: scale(2.4); opacity: 0; }
     }
     .status-dot::before {
       content: '';
@@ -175,19 +307,15 @@
       inset: 0;
       border-radius: 9999px;
       background-color: #34A853;
-      animation: pulseRing 2.2s infinite;
+      animation: pulseRing 2s infinite;
     }
 
-    @keyframes floatMote {
-      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
-      50% { transform: translateY(-22px) translateX(10px); opacity: 0.48; }
-    }
-    .mote {
-      position: absolute;
-      border-radius: 9999px;
-      background: radial-gradient(circle, rgba(212,175,55,0.85) 0%, rgba(52,168,83,0) 70%);
-      pointer-events: none;
-      animation: floatMote 9s ease-in-out infinite;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -199,21 +327,14 @@
   <!-- Vignettatura Istituzionale ad Alto Contrasto -->
   <div class="fixed inset-0 z-10 cinematic-overlay pointer-events-none"></div>
 
-  <!-- Pulviscolo Luminoso -->
-  <div class="fixed inset-0 z-10 pointer-events-none overflow-hidden">
-    <div class="mote w-2 h-2 top-1/4 left-1/5" style="animation-delay: 0s;"></div>
-    <div class="mote w-1.5 h-1.5 top-2/3 left-1/3" style="animation-delay: 2.5s;"></div>
-    <div class="mote w-2.5 h-2.5 top-1/3 right-1/4" style="animation-delay: 4s;"></div>
-    <div class="mote w-1.5 h-1.5 bottom-1/4 right-1/3" style="animation-delay: 6s;"></div>
-  </div>
-
   <!-- Contenitore Principale -->
   <div class="app-shell relative z-20 flex flex-col justify-between gap-6 w-full max-w-7xl mx-auto">
 
     <!-- Header -->
     <header class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 animate-fade-up">
       <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border border-white/30 shadow-lg bg-[#0014A8] flex items-center justify-center">
+        <!-- Logo Circolare Blu Reale -->
+        <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border border-white/30 shadow-lg bg-[#0014A8] flex items-center justify-center transition-transform duration-300 hover:scale-105">
           <img src="logo.jpg" alt="Logo Pro Loco Santa Cristina e Bissone" class="w-full h-full object-cover scale-105" />
         </div>
         <div class="text-center sm:text-left body-text-shadow">
@@ -235,50 +356,50 @@
 
     <!-- Hero Centrale -->
     <main class="my-auto text-center w-full max-w-4xl mx-auto px-1 sm:px-4 py-2">
-      <p class="animate-fade-up delay-150 text-[11px] sm:text-sm uppercase tracking-[0.26em] sm:tracking-[0.35em] text-platano-gold font-semibold mb-2.5 sm:mb-4 body-text-shadow">
-        Tradizione • Comunità • Territorio
-      </p>
-
-      <h1 class="animate-fade-up delay-150 font-serif font-semibold tracking-tight text-white hero-text-shadow">
-        <span class="block hero-title-line">
-          Pro Loco
+      <h1 class="font-serif font-semibold tracking-tight text-white hero-text-shadow">
+        <span class="title-mask">
+          <span class="title-reveal-1 hero-title-line">
+            Pro Loco
+          </span>
         </span>
-        <span class="block hero-title-line mt-0.5 sm:mt-1">
-          Santa Cristina <span class="italic font-normal text-white/95">&amp;</span> Bissone
+        <span class="title-mask mt-0.5 sm:mt-1 block">
+          <span class="title-reveal-2 hero-title-line">
+            Santa Cristina <span class="italic font-normal text-white/95">&amp;</span> Bissone
+          </span>
         </span>
       </h1>
 
-      <div class="animate-fade-up delay-300 flex items-center justify-center gap-3 my-4 sm:my-6">
-        <span class="h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-platano-light"></span>
-        <span class="w-2 h-2 rotate-45 bg-platano-gold shadow shrink-0"></span>
-        <span class="h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-platano-light"></span>
+      <div class="flex items-center justify-center gap-3 my-4 sm:my-6">
+        <span class="divider-line-left h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-platano-light"></span>
+        <span class="divider-diamond w-2 h-2 bg-platano-gold shadow shrink-0"></span>
+        <span class="divider-line-right h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-platano-light"></span>
       </div>
 
-      <p class="animate-fade-up delay-300 text-xs sm:text-base md:text-lg text-white font-normal leading-relaxed max-w-2xl mx-auto body-text-shadow px-1">
+      <p class="animate-fade-up delay-340 text-xs sm:text-base md:text-lg text-white font-normal leading-relaxed max-w-2xl mx-auto body-text-shadow px-1">
         Stiamo preparando il calendario delle prossime iniziative culturali, gastronomiche e di valorizzazione del territorio.
       </p>
 
       <!-- Call to Action: Instagram, Facebook e Scrivici -->
-      <div class="animate-fade-up delay-450 mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
+      <div class="animate-fade-up delay-460 mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
         <a href="https://www.instagram.com/prolocoscb" target="_blank" rel="noopener noreferrer"
-           class="glass-pill hover:bg-platano-dark/65 hover:border-platano-light transition-all duration-300 px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
-          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+           class="glass-pill cta-btn hover:bg-platano-dark/65 hover:border-platano-light px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
+          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
           <span>Instagram</span>
         </a>
 
         <a href="https://www.facebook.com/prolocoscb" target="_blank" rel="noopener noreferrer"
-           class="glass-pill hover:bg-platano-dark/65 hover:border-platano-light transition-all duration-300 px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
-          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+           class="glass-pill cta-btn hover:bg-platano-dark/65 hover:border-platano-light px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
+          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
             <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
           </svg>
           <span>Facebook</span>
         </a>
 
         <button type="button" onclick="toggleWritePopup(true)"
-           class="bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-lg shadow-black/40 border border-white/15 transition-all duration-300 px-6 py-2.5 rounded-full flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer">
-          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+           class="cta-btn btn-shimmer bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-lg shadow-black/40 border border-white/15 px-6 py-2.5 rounded-full flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer group">
+          <svg class="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
           <span>Scrivici</span>
@@ -287,15 +408,15 @@
     </main>
 
     <!-- Footer: Didascalia Vista Aerea & Indicatori Slide -->
-    <footer class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-450 body-text-shadow">
+    <footer class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-460 body-text-shadow">
       <div class="flex items-center gap-2.5 sm:gap-3 text-center sm:text-left">
         <svg class="w-4 h-4 text-platano-light shrink-0 hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
         </svg>
         <div>
-          <p id="slide-title" class="text-xs sm:text-sm font-semibold text-white tracking-wide transition-opacity duration-700"></p>
-          <p id="slide-subtitle" class="text-[11px] text-white/80 font-normal transition-opacity duration-700"></p>
+          <p id="slide-title" class="caption-transition text-xs sm:text-sm font-semibold text-white tracking-wide"></p>
+          <p id="slide-subtitle" class="caption-transition text-[11px] text-white/80 font-normal"></p>
         </div>
       </div>
 
@@ -307,27 +428,29 @@
     </footer>
   </div>
 
-  <!-- Popup Compilazione Form Contatti -->
-  <div id="write-popup" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy-dark/85 backdrop-blur-md overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-    <div class="glass-popup animate-pop-in rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left">
-      <button type="button" onclick="toggleWritePopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition cursor-pointer" aria-label="Chiudi popup">
+  <!-- Popup Compilazione Form Contatti con Animazione Stile Apple -->
+  <div id="write-popup" class="apple-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <div class="apple-popup-card rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left">
+      <button type="button" onclick="toggleWritePopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi popup">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
 
-      <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Scrivici</span>
-      <h2 id="popup-title" class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-2 pr-8">Parla con il Direttivo</h2>
-      <p class="text-xs sm:text-sm text-white/85 font-light leading-relaxed mb-4">
-        Hai un’idea per il paese o vuoi dare una mano alla Pro Loco? Compila il modulo qui sotto: il tuo messaggio arriverà direttamente al direttivo.
-      </p>
+      <div class="popup-stagger popup-stagger-1">
+        <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Scrivici</span>
+        <h2 id="popup-title" class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-2 pr-8">Parla con il Direttivo</h2>
+        <p class="text-xs sm:text-sm text-white/85 font-light leading-relaxed mb-4">
+          Hai un’idea per il paese o vuoi dare una mano alla Pro Loco? Compila il modulo qui sotto: il tuo messaggio arriverà direttamente al direttivo.
+        </p>
+      </div>
 
       <form id="proloco-contact-form" action="https://formsubmit.co/prolocoscb.pv@proton.me" method="POST" class="space-y-3">
         <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Pro Loco Santa Cristina e Bissone" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="popup-stagger popup-stagger-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label for="sender-name" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Nome o Cognome</label>
             <input id="sender-name" name="Nome" type="text" required placeholder="Il tuo nome"
@@ -340,7 +463,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="popup-stagger popup-stagger-3">
           <label for="sender-topic" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Come vuoi contattarci</label>
           <select id="sender-topic" name="Motivo" class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm">
             <option value="Proposta o idea per il paese" class="bg-navy-dark text-white">Ho un’idea o una proposta per il paese</option>
@@ -349,17 +472,17 @@
           </select>
         </div>
 
-        <div>
+        <div class="popup-stagger popup-stagger-4">
           <label for="sender-message" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Il tuo messaggio</label>
           <textarea id="sender-message" name="Messaggio" rows="3" required
                     placeholder="Raccontaci la tua idea o come vorresti aiutare la Pro Loco..."
                     class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm resize-y"></textarea>
         </div>
 
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+        <div class="popup-stagger popup-stagger-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
           <span class="text-[11px] text-white/60">Destinatario: prolocoscb.pv@proton.me</span>
           <button type="submit" id="submit-contact-btn"
-                  class="bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full transition cursor-pointer shrink-0">
+                  class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full cursor-pointer shrink-0">
             Invia messaggio
           </button>
         </div>
@@ -378,16 +501,19 @@
     const slidesData = [
       {
         image: 'IMG_0119.jpeg',
+        fallback: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80',
         title: 'Bissone vista dall’alto',
         subtitle: 'Veduta aerea tra campi coltivati, alberature e corti storiche di Bissone'
       },
       {
         image: 'IMG_0120.jpeg',
+        fallback: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80',
         title: 'Santa Cristina vista dall’alto',
         subtitle: 'Una panoramica su Santa Cristina'
       },
       {
         image: 'IMG_0124.jpeg',
+        fallback: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=80',
         title: 'Il Centro di Santa Cristina',
         subtitle: 'Una visione a volo d’uccello sul centro cittadino di Santa Cristina'
       }
@@ -396,43 +522,71 @@
     let currentIndex = 0;
     let slideInterval = null;
     const SLIDE_DURATION = 7500;
+    document.documentElement.style.setProperty('--slide-duration', `${SLIDE_DURATION}ms`);
 
     const container = document.getElementById('slideshow-container');
     const dotsContainer = document.getElementById('slide-dots');
     const titleEl = document.getElementById('slide-title');
     const subtitleEl = document.getElementById('slide-subtitle');
 
-    function renderSlides() {
+    function resolveImage(slide) {
+      return new Promise((resolve) => {
+        const probe = new Image();
+        probe.onload = () => resolve(slide.image);
+        probe.onerror = () => resolve(slide.fallback);
+        probe.src = slide.image;
+      });
+    }
+
+    function buildDotButton(idx, isActive) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Vai alla foto ${idx + 1}`);
+      dot.onclick = () => goToSlide(idx);
+      updateDotVisual(dot, isActive);
+      return dot;
+    }
+
+    function updateDotVisual(dot, isActive) {
+      dot.innerHTML = '';
+      if (isActive) {
+        dot.className = 'relative h-1.5 w-8 rounded-full bg-white/25 overflow-hidden transition-all duration-500 cursor-pointer';
+        const fill = document.createElement('span');
+        fill.className = 'dot-fill absolute inset-0 rounded-full bg-platano-light';
+        dot.appendChild(fill);
+      } else {
+        dot.className = 'h-1.5 w-2 rounded-full bg-white/40 hover:bg-white/75 transition-all duration-500 cursor-pointer';
+      }
+    }
+
+    async function renderSlides() {
       container.innerHTML = '';
       dotsContainer.innerHTML = '';
+
+      const urls = await Promise.all(slidesData.map(resolveImage));
 
       slidesData.forEach((slide, idx) => {
         const div = document.createElement('div');
         div.className = `slide-bg ${idx === 0 ? 'active' : ''}`;
-        div.style.backgroundImage = `url('${slide.image}')`;
+        div.style.backgroundImage = `url('${urls[idx]}')`;
         container.appendChild(div);
 
-        const dot = document.createElement('button');
-        dot.className = `h-1.5 rounded-full transition-all duration-500 cursor-pointer ${
-          idx === 0 ? 'w-7 bg-platano-light' : 'w-2 bg-white/45 hover:bg-white/75'
-        }`;
-        dot.setAttribute('aria-label', `Vai alla foto ${idx + 1}`);
-        dot.onclick = () => goToSlide(idx);
-        dotsContainer.appendChild(dot);
+        dotsContainer.appendChild(buildDotButton(idx, idx === 0));
       });
 
-      updateCaption(0);
+      titleEl.textContent = slidesData[0].title;
+      subtitleEl.textContent = slidesData[0].subtitle;
     }
 
     function updateCaption(idx) {
-      titleEl.style.opacity = 0;
-      subtitleEl.style.opacity = 0;
+      titleEl.classList.add('caption-hidden');
+      subtitleEl.classList.add('caption-hidden');
       setTimeout(() => {
         titleEl.textContent = slidesData[idx].title;
         subtitleEl.textContent = slidesData[idx].subtitle;
-        titleEl.style.opacity = 1;
-        subtitleEl.style.opacity = 1;
-      }, 280);
+        titleEl.classList.remove('caption-hidden');
+        subtitleEl.classList.remove('caption-hidden');
+      }, 260);
     }
 
     function goToSlide(idx) {
@@ -441,13 +595,13 @@
       if (!slides.length) return;
 
       slides[currentIndex].classList.remove('active');
-      dots[currentIndex].className = 'h-1.5 w-2 rounded-full bg-white/45 hover:bg-white/75 transition-all duration-500 cursor-pointer';
+      updateDotVisual(dots[currentIndex], false);
 
       currentIndex = (idx + slides.length) % slides.length;
 
       void slides[currentIndex].offsetWidth;
       slides[currentIndex].classList.add('active');
-      dots[currentIndex].className = 'h-1.5 w-7 rounded-full bg-platano-light transition-all duration-500 cursor-pointer';
+      updateDotVisual(dots[currentIndex], true);
 
       updateCaption(currentIndex);
       restartTimer();
@@ -458,15 +612,32 @@
       slideInterval = setInterval(() => goToSlide(currentIndex + 1), SLIDE_DURATION);
     }
 
+    let closePopupTimer = null;
+
     function toggleWritePopup(show) {
       const popup = document.getElementById('write-popup');
+      if (closePopupTimer) {
+        clearTimeout(closePopupTimer);
+        closePopupTimer = null;
+      }
+
       if (show) {
-        popup.classList.remove('hidden');
+        popup.classList.remove('hidden', 'is-closing');
         popup.classList.add('flex');
-        setTimeout(() => document.getElementById('sender-name').focus(), 60);
+        void popup.offsetWidth;
+        requestAnimationFrame(() => popup.classList.add('is-open'));
+        setTimeout(() => {
+          const nameInput = document.getElementById('sender-name');
+          if (nameInput) nameInput.focus();
+        }, 140);
       } else {
-        popup.classList.add('hidden');
-        popup.classList.remove('flex');
+        if (popup.classList.contains('hidden')) return;
+        popup.classList.remove('is-open');
+        popup.classList.add('is-closing');
+        closePopupTimer = setTimeout(() => {
+          popup.classList.add('hidden');
+          popup.classList.remove('flex', 'is-closing');
+        }, 300);
       }
     }
 
@@ -515,8 +686,7 @@
       }
     });
 
-    renderSlides();
-    restartTimer();
+    renderSlides().then(() => restartTimer());
   </script>
 </body>
 </html>
