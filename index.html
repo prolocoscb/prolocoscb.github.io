@@ -124,12 +124,51 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     }
 
-    .glass-popup {
+    /* Animazione stile Apple per sfondo e card del popup */
+    .apple-backdrop {
+      background: rgba(0, 8, 22, 0.0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      opacity: 0;
+      transition:
+        opacity 0.34s cubic-bezier(0.32, 0.72, 0, 1),
+        backdrop-filter 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        -webkit-backdrop-filter 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+        background-color 0.34s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .apple-backdrop.is-open {
+      background: rgba(0, 8, 22, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 1;
+    }
+
+    .apple-popup-card {
       background: rgba(0, 17, 43, 0.90);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.22);
-      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 32px 64px -14px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      opacity: 0;
+      transform: scale(0.91) translateY(14px);
+      transition:
+        transform 0.46s cubic-bezier(0.19, 1.16, 0.24, 1),
+        opacity 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+      will-change: transform, opacity;
+    }
+
+    .apple-backdrop.is-open .apple-popup-card {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .apple-backdrop.is-closing .apple-popup-card {
+      opacity: 0;
+      transform: scale(0.95) translateY(8px);
+      transition:
+        transform 0.26s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.22s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
     .form-input {
@@ -157,12 +196,6 @@
     .delay-150 { animation-delay: 0.15s; opacity: 0; }
     .delay-300 { animation-delay: 0.30s; opacity: 0; }
     .delay-450 { animation-delay: 0.45s; opacity: 0; }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.95) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .animate-pop-in { animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
     @keyframes pulseRing {
       0% { transform: scale(0.85); opacity: 0.85; }
@@ -307,9 +340,9 @@
     </footer>
   </div>
 
-  <!-- Popup Compilazione Form Contatti -->
-  <div id="write-popup" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-navy-dark/85 backdrop-blur-md overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-    <div class="glass-popup animate-pop-in rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left">
+  <!-- Popup Compilazione Form Contatti con Animazione Stile Apple -->
+  <div id="write-popup" class="apple-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <div class="apple-popup-card rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left">
       <button type="button" onclick="toggleWritePopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition cursor-pointer" aria-label="Chiudi popup">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -458,15 +491,36 @@
       slideInterval = setInterval(() => goToSlide(currentIndex + 1), SLIDE_DURATION);
     }
 
+    let closePopupTimer = null;
+
     function toggleWritePopup(show) {
       const popup = document.getElementById('write-popup');
+      if (closePopupTimer) {
+        clearTimeout(closePopupTimer);
+        closePopupTimer = null;
+      }
+
       if (show) {
         popup.classList.remove('hidden');
+        popup.classList.remove('is-closing');
         popup.classList.add('flex');
-        setTimeout(() => document.getElementById('sender-name').focus(), 60);
+        void popup.offsetWidth;
+        requestAnimationFrame(() => {
+          popup.classList.add('is-open');
+        });
+        setTimeout(() => {
+          const nameInput = document.getElementById('sender-name');
+          if (nameInput) nameInput.focus();
+        }, 120);
       } else {
-        popup.classList.add('hidden');
-        popup.classList.remove('flex');
+        if (popup.classList.contains('hidden')) return;
+        popup.classList.remove('is-open');
+        popup.classList.add('is-closing');
+        closePopupTimer = setTimeout(() => {
+          popup.classList.add('hidden');
+          popup.classList.remove('flex');
+          popup.classList.remove('is-closing');
+        }, 320);
       }
     }
 
