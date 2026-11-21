@@ -3,12 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Pro Loco Santa Cristina e Bissone</title>
-  <meta name="description" content="Sito ufficiale della Pro Loco di Santa Cristina e Bissone (PV)" />
+  <title>Pro Loco di Santa Cristina e Bissone (PV)</title>
+  <meta name="description" content="Sito ufficiale della Pro Loco di Santa Cristina e Bissone (PV) — Eventi, cultura, gastronomia e valorizzazione del territorio." />
+  <meta name="theme-color" content="#00112B" />
+
+  <!-- Favicon & Apple Touch Icon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="apple-touch-icon" href="logo.png" />
+
+  <!-- Open Graph / Anteprima Social & WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="it_IT" />
+  <meta property="og:title" content="Pro Loco di Santa Cristina e Bissone" />
+  <meta property="og:description" content="Iniziative culturali, gastronomiche e di valorizzazione del territorio a Santa Cristina e Bissone (PV)." />
+  <meta property="og:image" content="logo.png" />
+
+  <!-- Preload Prima Immagine Carosello per Caricamento Istantaneo -->
+  <link rel="preload" as="image" href="IMG_0119.jpeg" />
 
   <!-- Bunny Fonts (Alternativa Europea GDPR-compliant senza tracciamento IP) -->
-  <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,500,600,700,400i,600i|montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
+  <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,500,600,700,400i,600i|montserrat:300,400,500,600,700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -48,6 +63,12 @@
       background-color: #00112B;
       color: #ffffff;
       font-family: 'Montserrat', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body.modal-open {
+      overflow: hidden;
     }
 
     .app-shell {
@@ -100,8 +121,8 @@
 
     .cinematic-overlay {
       background:
-        radial-gradient(circle at 50% 48%, rgba(0, 17, 43, 0.62) 0%, rgba(0, 17, 43, 0.85) 68%, rgba(0, 11, 28, 0.96) 100%),
-        linear-gradient(180deg, rgba(0, 11, 28, 0.86) 0%, rgba(0, 28, 70, 0.45) 45%, rgba(0, 11, 28, 0.95) 100%);
+        radial-gradient(circle at 50% 48%, rgba(0, 17, 43, 0.60) 0%, rgba(0, 17, 43, 0.84) 68%, rgba(0, 11, 28, 0.96) 100%),
+        linear-gradient(180deg, rgba(0, 11, 28, 0.85) 0%, rgba(0, 28, 70, 0.42) 45%, rgba(0, 11, 28, 0.95) 100%);
     }
 
     .hero-text-shadow {
@@ -129,6 +150,8 @@
     .cta-btn {
       position: relative;
       overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, filter 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     }
     .cta-btn:hover {
@@ -168,20 +191,20 @@
     }
 
     .apple-backdrop.is-open {
-      background: rgba(0, 8, 22, 0.74);
+      background: rgba(0, 8, 22, 0.76);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
       opacity: 1;
     }
 
     .apple-popup-card {
-      background: rgba(0, 17, 43, 0.92);
+      background: rgba(0, 17, 43, 0.94);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.24);
       box-shadow: 0 36px 70px -14px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.18);
       opacity: 0;
-      transform: scale(0.86) translateY(24px);
+      transform: scale(0.88) translateY(22px);
       transition:
         transform 0.52s cubic-bezier(0.18, 1.22, 0.24, 1),
         opacity 0.30s cubic-bezier(0.32, 0.72, 0, 1);
@@ -234,7 +257,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    .delay-100 { animation-delay: 0.12s; opacity: 0; }
     .delay-340 { animation-delay: 0.48s; opacity: 0; }
     .delay-460 { animation-delay: 0.62s; opacity: 0; }
 
@@ -320,26 +342,28 @@
     }
   </style>
 </head>
-<body class="relative select-none">
+<body class="relative">
 
-  <!-- Sfondo Carosello Paesaggistico -->
-  <div id="slideshow-container" class="fixed inset-0 z-0 overflow-hidden"></div>
+  <!-- Sfondo Carosello Paesaggistico (Prima slide pre-renderizzata per LCP istantaneo) -->
+  <div id="slideshow-container" class="fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+    <div class="slide-bg active" style="background-image: url('IMG_0119.jpeg');"></div>
+  </div>
 
   <!-- Vignettatura Istituzionale ad Alto Contrasto -->
-  <div class="fixed inset-0 z-10 cinematic-overlay pointer-events-none"></div>
+  <div class="fixed inset-0 z-10 cinematic-overlay pointer-events-none" aria-hidden="true"></div>
 
   <!-- Contenitore Principale -->
-  <div class="app-shell relative z-20 flex flex-col justify-between gap-6 w-full max-w-7xl mx-auto">
+  <div id="swipe-area" class="app-shell relative z-20 flex flex-col justify-between gap-6 w-full max-w-7xl mx-auto">
 
     <!-- Header -->
     <header class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 animate-fade-up">
       <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border border-white/30 shadow-lg bg-[#0014A8] flex items-center justify-center transition-transform duration-300 hover:scale-105">
-          <img src="logo.jpg" alt="Logo Pro Loco Santa Cristina e Bissone" class="w-full h-full object-cover scale-105" />
+        <div class="w-13 h-13 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border border-white/30 shadow-lg bg-[#0012B8] flex items-center justify-center transition-transform duration-300 hover:scale-105">
+          <img src="logo.png" onerror="this.onerror=null;this.src='logo.jpg';" alt="Logo Pro Loco di Santa Cristina e Bissone" class="w-full h-full object-contain p-0.5" />
         </div>
         <div class="text-center sm:text-left body-text-shadow">
           <span class="block text-[10px] sm:text-xs uppercase tracking-[0.24em] sm:tracking-[0.28em] text-platano-light font-semibold">Provincia di Pavia</span>
-          <span class="font-serif text-base sm:text-xl font-semibold tracking-wide text-white leading-tight block">Pro Loco Santa Cristina e Bissone</span>
+          <span class="font-serif text-base sm:text-xl font-semibold tracking-wide text-white leading-tight block">Pro Loco di Santa Cristina e Bissone</span>
         </div>
       </div>
 
@@ -369,7 +393,7 @@
         </span>
       </h1>
 
-      <div class="flex items-center justify-center gap-3 my-4 sm:my-6">
+      <div class="flex items-center justify-center gap-3 my-4 sm:my-6" aria-hidden="true">
         <span class="divider-line-left h-[1px] w-12 sm:w-24 bg-gradient-to-r from-transparent to-platano-light"></span>
         <span class="divider-diamond w-2 h-2 bg-platano-gold shadow shrink-0"></span>
         <span class="divider-line-right h-[1px] w-12 sm:w-24 bg-gradient-to-l from-transparent to-platano-light"></span>
@@ -383,7 +407,7 @@
       <div class="animate-fade-up delay-460 mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
         <a href="https://www.instagram.com/prolocoscb" target="_blank" rel="noopener noreferrer"
            class="glass-pill cta-btn hover:bg-platano-dark/65 hover:border-platano-light px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
-          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
           <span>Instagram</span>
@@ -391,7 +415,7 @@
 
         <a href="https://www.facebook.com/prolocoscb" target="_blank" rel="noopener noreferrer"
            class="glass-pill cta-btn hover:bg-platano-dark/65 hover:border-platano-light px-5 py-2.5 rounded-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-medium tracking-wide text-white group">
-          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-platano-light shrink-0 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
           </svg>
           <span>Facebook</span>
@@ -399,7 +423,7 @@
 
         <button type="button" onclick="toggleWritePopup(true)"
            class="cta-btn btn-shimmer bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-lg shadow-black/40 border border-white/15 px-6 py-2.5 rounded-full flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer group">
-          <svg class="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
           <span>Scrivici</span>
@@ -407,29 +431,35 @@
       </div>
     </main>
 
-    <!-- Footer: Didascalia Vista Aerea & Indicatori Slide -->
-    <footer class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-460 body-text-shadow">
-      <div class="flex items-center gap-2.5 sm:gap-3 text-center sm:text-left">
-        <svg class="w-4 h-4 text-platano-light shrink-0 hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        <div>
-          <p id="slide-title" class="caption-transition text-xs sm:text-sm font-semibold text-white tracking-wide"></p>
-          <p id="slide-subtitle" class="caption-transition text-[11px] text-white/80 font-normal"></p>
+    <!-- Footer: Didascalia Vista Aerea, Indicatori Slide & Dati Legali Obbligatori -->
+    <footer class="flex flex-col gap-3.5 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-460 body-text-shadow">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+        <!-- Didascalia Luogo -->
+        <div class="flex items-center gap-2.5 sm:gap-3 text-center sm:text-left">
+          <svg class="w-4 h-4 text-platano-light shrink-0 hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <div>
+            <p id="slide-title" class="caption-transition text-xs sm:text-sm font-semibold text-white tracking-wide">Bissone vista dall’alto</p>
+            <p id="slide-subtitle" class="caption-transition text-[11px] text-white/80 font-normal">Veduta aerea tra campi coltivati, alberature e corti storiche di Bissone</p>
+          </div>
+        </div>
+
+        <!-- Indicatori Carosello & Privacy -->
+        <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-4">
+          <div id="slide-dots" class="flex items-center gap-2" role="tablist" aria-label="Seleziona foto panoramica"></div>
+          <span class="text-[11px] text-white/45 hidden sm:inline" aria-hidden="true">•</span>
+          <button type="button" onclick="togglePrivacyPopup(true)" class="text-[11px] text-white/85 underline decoration-white/35 hover:text-platano-light hover:decoration-platano-light transition cursor-pointer">
+            Informativa Privacy &amp; Cookie
+          </button>
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-        <div id="slide-dots" class="flex items-center gap-2"></div>
-        <span class="text-[11px] text-white/55 hidden md:inline">•</span>
-        <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] sm:text-[11px] text-white/75 tracking-wider text-center">
-          <span>© 2026 Pro Loco Santa Cristina e Bissone</span>
-          <span class="text-white/40">•</span>
-          <button type="button" onclick="togglePrivacyPopup(true)" class="underline decoration-white/35 hover:text-platano-light hover:decoration-platano-light transition cursor-pointer">
-            Privacy Policy
-          </button>
-        </div>
+      <!-- Riga Dati Istituzionali e Fiscali (Art. 35 D.P.R. 633/1972) -->
+      <div class="pt-2.5 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-1.5 text-[10px] sm:text-[11px] text-white/65 tracking-wide text-center md:text-left">
+        <span>© 2026 <strong class="font-medium text-white/85">Pro Loco di Santa Cristina e Bissone</strong> — Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV)</span>
+        <span>C.F. <span class="text-white/85">90010240183</span> • P.IVA <span class="text-white/85">03048290187</span></span>
       </div>
     </footer>
   </div>
@@ -486,7 +516,7 @@
         </div>
 
         <div class="popup-stagger popup-stagger-4 pt-0.5">
-          <label class="flex items-start gap-2.5 cursor-pointer text-[11px] text-white/80 leading-snug select-none">
+          <label class="flex items-start gap-2.5 cursor-pointer text-[11px] text-white/80 leading-snug">
             <input id="privacy-consent" name="Consenso_Privacy" type="checkbox" required
                    class="mt-0.5 h-3.5 w-3.5 rounded border-white/30 bg-navy-dark accent-platano-light shrink-0 cursor-pointer" />
             <span>
@@ -504,11 +534,11 @@
         </div>
       </form>
 
-      <div id="form-feedback" class="hidden mt-3 rounded-xl px-3.5 py-2.5 text-xs leading-relaxed"></div>
+      <div id="form-feedback" class="hidden mt-3 rounded-xl px-3.5 py-2.5 text-xs leading-relaxed" role="status" aria-live="polite"></div>
 
       <div class="mt-5 pt-3.5 border-t border-white/15 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/65">
-        <span>27010 Santa Cristina e Bissone (PV)</span>
-        <span>Lombardia • Italia</span>
+        <span>Via Vittorio Veneto 5 • 27010 Santa Cristina e Bissone (PV)</span>
+        <span>C.F. 90010240183</span>
       </div>
     </div>
   </div>
@@ -528,7 +558,7 @@
       <div class="space-y-3 text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-[60vh] overflow-y-auto pr-1">
         <p>
           <strong class="font-semibold text-white">1. Titolare del trattamento:</strong><br />
-          Pro Loco Santa Cristina e Bissone, con sede in 27010 Santa Cristina e Bissone (PV) — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
+          <strong>Pro Loco di Santa Cristina e Bissone</strong> (Associazione non riconosciuta), con sede legale in Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV) — C.F. 90010240183 — P.IVA 03048290187 — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
         </p>
         <p>
           <strong class="font-semibold text-white">2. Tipologia di dati raccolti, cookie e font:</strong><br />
@@ -540,7 +570,7 @@
         </p>
         <p>
           <strong class="font-semibold text-white">4. Conservazione e diritti dell’interessato:</strong><br />
-          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile richiedere l’accesso, la rettifica o la cancellazione dei propri dati scrivendo a <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
+          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile esercitare i diritti previsti dagli artt. 15–22 del GDPR (accesso, rettifica, cancellazione, limitazione) scrivendo a <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
         </p>
       </div>
 
@@ -597,7 +627,9 @@
     function buildDotButton(idx, isActive) {
       const dot = document.createElement('button');
       dot.type = 'button';
-      dot.setAttribute('aria-label', `Vai alla foto ${idx + 1}`);
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      dot.setAttribute('aria-label', `Foto ${idx + 1}: ${slidesData[idx].title}`);
       dot.onclick = () => goToSlide(idx);
       updateDotVisual(dot, isActive);
       return dot;
@@ -605,6 +637,7 @@
 
     function updateDotVisual(dot, isActive) {
       dot.innerHTML = '';
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
       if (isActive) {
         dot.className = 'relative h-1.5 w-8 rounded-full bg-white/25 overflow-hidden transition-all duration-500 cursor-pointer';
         const fill = document.createElement('span');
@@ -616,10 +649,10 @@
     }
 
     async function renderSlides() {
+      const urls = await Promise.all(slidesData.map(resolveImage));
+
       container.innerHTML = '';
       dotsContainer.innerHTML = '';
-
-      const urls = await Promise.all(slidesData.map(resolveImage));
 
       slidesData.forEach((slide, idx) => {
         const div = document.createElement('div');
@@ -686,8 +719,32 @@
       slideInterval = setInterval(() => goToSlide(currentIndex + 1), SLIDE_DURATION);
     }
 
+    // Supporto Swipe Touch su iPad/Smartphone e Frecce Tastiera
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeArea = document.getElementById('swipe-area');
+
+    swipeArea.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    swipeArea.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 55) {
+        goToSlide(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+      }
+    }, { passive: true });
+
+    // Gestione Modali con Scroll Lock
     let closePopupTimer = null;
     let closePrivacyTimer = null;
+
+    function syncBodyScrollLock() {
+      const writeOpen = !document.getElementById('write-popup').classList.contains('hidden');
+      const privacyOpen = !document.getElementById('privacy-popup').classList.contains('hidden');
+      document.body.classList.toggle('modal-open', writeOpen || privacyOpen);
+    }
 
     function toggleWritePopup(show) {
       const popup = document.getElementById('write-popup');
@@ -699,12 +756,13 @@
       if (show) {
         popup.classList.remove('hidden', 'is-closing');
         popup.classList.add('flex');
+        syncBodyScrollLock();
         void popup.offsetWidth;
         requestAnimationFrame(() => popup.classList.add('is-open'));
         setTimeout(() => {
           const nameInput = document.getElementById('sender-name');
           if (nameInput) nameInput.focus();
-        }, 140);
+        }, 160);
       } else {
         if (popup.classList.contains('hidden')) return;
         popup.classList.remove('is-open');
@@ -712,6 +770,7 @@
         closePopupTimer = setTimeout(() => {
           popup.classList.add('hidden');
           popup.classList.remove('flex', 'is-closing');
+          syncBodyScrollLock();
         }, 300);
       }
     }
@@ -726,6 +785,7 @@
       if (show) {
         popup.classList.remove('hidden', 'is-closing');
         popup.classList.add('flex');
+        syncBodyScrollLock();
         void popup.offsetWidth;
         requestAnimationFrame(() => popup.classList.add('is-open'));
       } else {
@@ -735,6 +795,7 @@
         closePrivacyTimer = setTimeout(() => {
           popup.classList.add('hidden');
           popup.classList.remove('flex', 'is-closing');
+          syncBodyScrollLock();
         }, 300);
       }
     }
@@ -748,16 +809,22 @@
     });
 
     document.addEventListener('keydown', (e) => {
+      const privacyPopup = document.getElementById('privacy-popup');
+      const writePopup = document.getElementById('write-popup');
+      const isModalOpen = !privacyPopup.classList.contains('hidden') || !writePopup.classList.contains('hidden');
+
       if (e.key === 'Escape') {
-        const privacyPopup = document.getElementById('privacy-popup');
         if (!privacyPopup.classList.contains('hidden')) {
           togglePrivacyPopup(false);
         } else {
           toggleWritePopup(false);
         }
+      } else if (!isModalOpen && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+        goToSlide(e.key === 'ArrowRight' ? currentIndex + 1 : currentIndex - 1);
       }
     });
 
+    // Invio Asincrono Modulo Contatti
     const contactForm = document.getElementById('proloco-contact-form');
     const submitBtn = document.getElementById('submit-contact-btn');
     const feedbackEl = document.getElementById('form-feedback');
@@ -799,6 +866,3 @@
   </script>
 </body>
 </html>
-```
-
-Ora non c'è più alcuna chiamata ai server di Google (`fonts.googleapis.com` o `fonts.gstatic.com`), i font restano identici (*Cormorant Garamond* + *Montserrat*) tramite **Bunny Fonts** (europeo, zero tracciamento IP) e il sito è allineato al GDPR senza bisogno di cookie banner.
