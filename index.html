@@ -89,6 +89,21 @@
       }
     }
 
+    .brand-logo-wrap {
+      width: 2.35rem;
+      height: 2.35rem;
+      min-width: 2.35rem;
+      min-height: 2.35rem;
+    }
+    @media (min-width: 640px) {
+      .brand-logo-wrap {
+        width: 2.75rem;
+        height: 2.75rem;
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+      }
+    }
+
     @keyframes kenBurnsSlow {
       0% { transform: scale(1.0) translate3d(0, 0, 0); }
       50% { transform: scale(1.08) translate3d(-1%, -0.6%, 0); }
@@ -134,7 +149,7 @@
     }
 
     .hero-title-line {
-      font-size: clamp(2.15rem, 6.4vw, 4.5rem);
+      font-size: clamp(2.05rem, 6.4vw, 4.5rem);
       line-height: 1.08;
     }
 
@@ -155,11 +170,11 @@
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, filter 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     }
     .cta-btn:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
     }
     .cta-btn:active {
-      transform: translateY(0) scale(0.96);
+      transform: translateY(0) scale(0.97);
     }
 
     @keyframes btnShimmer {
@@ -179,35 +194,35 @@
     }
 
     .apple-backdrop {
-      background: rgba(0, 8, 22, 0);
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
+      background: rgba(0, 8, 22, 0.76);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
       transition:
-        opacity 0.38s cubic-bezier(0.32, 0.72, 0, 1),
-        backdrop-filter 0.42s cubic-bezier(0.32, 0.72, 0, 1),
-        -webkit-backdrop-filter 0.42s cubic-bezier(0.32, 0.72, 0, 1),
-        background-color 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+        opacity 0.32s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0.32s;
     }
 
     .apple-backdrop.is-open {
-      background: rgba(0, 8, 22, 0.76);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
       opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.34s cubic-bezier(0.32, 0.72, 0, 1),
+        visibility 0s linear 0s;
     }
 
     .apple-popup-card {
       background: rgba(0, 17, 43, 0.94);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      box-shadow: 0 36px 70px -14px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 32px 64px -16px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.16);
       opacity: 0;
-      transform: scale(0.88) translateY(22px);
+      transform: scale(0.92) translateY(18px);
       transition:
-        transform 0.52s cubic-bezier(0.18, 1.22, 0.24, 1),
-        opacity 0.30s cubic-bezier(0.32, 0.72, 0, 1);
+        transform 0.44s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.28s cubic-bezier(0.32, 0.72, 0, 1);
       will-change: transform, opacity;
     }
 
@@ -218,21 +233,50 @@
 
     .apple-backdrop.is-closing .apple-popup-card {
       opacity: 0;
-      transform: scale(0.92) translateY(14px);
+      transform: scale(0.95) translateY(10px);
       transition:
-        transform 0.28s cubic-bezier(0.32, 0.72, 0, 1),
-        opacity 0.24s cubic-bezier(0.32, 0.72, 0, 1);
+        transform 0.24s cubic-bezier(0.32, 0.72, 0, 1),
+        opacity 0.22s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    /* Contenitore con altezza animata fluida stile iOS Sheet */
+    .morph-body {
+      position: relative;
+      transition: height 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: height;
+    }
+
+    .modal-view-panel {
+      transition:
+        opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .modal-view-panel.is-overlay-exit {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: scale(0.97) translateY(-6px);
+      pointer-events: none;
+    }
+
+    .modal-view-panel.is-entering {
+      opacity: 0;
+      transform: scale(0.98) translateY(8px);
     }
 
     .popup-stagger {
       opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.38s ease, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(8px);
+      transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .apple-backdrop.is-open .popup-stagger-1 { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
-    .apple-backdrop.is-open .popup-stagger-2 { opacity: 1; transform: translateY(0); transition-delay: 0.14s; }
-    .apple-backdrop.is-open .popup-stagger-3 { opacity: 1; transform: translateY(0); transition-delay: 0.20s; }
-    .apple-backdrop.is-open .popup-stagger-4 { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+    .apple-backdrop.is-open .popup-stagger-1 { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+    .apple-backdrop.is-open .popup-stagger-2 { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
+    .apple-backdrop.is-open .popup-stagger-3 { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+    .apple-backdrop.is-open .popup-stagger-4 { opacity: 1; transform: translateY(0); transition-delay: 0.20s; }
 
     .form-input {
       background: rgba(0, 28, 70, 0.65);
@@ -356,23 +400,27 @@
   <div id="swipe-area" class="app-shell relative z-20 flex flex-col justify-between gap-6 w-full max-w-7xl mx-auto">
 
     <!-- Header -->
-    <header class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 animate-fade-up">
-      <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
-        <div class="w-13 h-13 sm:w-14 sm:h-14 shrink-0 rounded-full overflow-hidden border border-white/30 shadow-lg bg-[#0012B8] flex items-center justify-center transition-transform duration-300 hover:scale-105">
-          <img src="logo.png" onerror="this.onerror=null;this.src='logo.jpg';" alt="Logo Pro Loco di Santa Cristina e Bissone" class="w-full h-full object-contain p-0.5" />
-        </div>
-        <div class="text-center sm:text-left body-text-shadow">
-          <span class="block text-[10px] sm:text-xs uppercase tracking-[0.24em] sm:tracking-[0.28em] text-platano-light font-semibold">Provincia di Pavia</span>
-          <span class="font-serif text-base sm:text-xl font-semibold tracking-wide text-white leading-tight block">Pro Loco di Santa Cristina e Bissone</span>
-        </div>
-      </div>
+    <header class="flex items-center justify-between gap-2.5 sm:gap-4 animate-fade-up">
+      <!-- Angolo in alto a sx: Pillola Unificata Logo + Chi siamo -->
+      <button type="button" onclick="openMainPopup('about')" aria-label="Scopri chi siamo e i dati della Pro Loco"
+              class="glass-pill cta-btn hover:bg-white/15 hover:border-platano-light/80 p-1 pr-3.5 sm:p-1.5 sm:pr-5 rounded-full flex items-center gap-2.5 sm:gap-3 text-left cursor-pointer group focus:outline-none focus:ring-2 focus:ring-platano-light">
+        <span class="brand-logo-wrap shrink-0 rounded-full overflow-hidden border border-white/25 bg-[#0012B8] flex items-center justify-center shadow-inner">
+          <img src="logo.png" onerror="this.onerror=null;this.src='logo.jpg';" alt="Stemma Pro Loco" class="w-full h-full object-contain p-0.5 block" />
+        </span>
+        <span class="flex items-center gap-1.5 sm:gap-2">
+          <span class="text-xs sm:text-sm font-medium tracking-wide text-white whitespace-nowrap">Chi siamo</span>
+          <svg class="w-3.5 h-3.5 text-platano-light shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </button>
 
       <!-- Badge Stato Direttivo -->
-      <div class="glass-pill px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full flex items-center justify-center gap-2 sm:gap-2.5 max-w-full">
+      <div class="glass-pill px-3 sm:px-4 py-1.5 sm:py-2 rounded-full flex items-center justify-center gap-2 sm:gap-2.5 shrink-0">
         <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0 status-dot">
           <span class="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-platano-light"></span>
         </span>
-        <span class="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-white text-center leading-snug">
+        <span class="text-[10px] sm:text-xs font-medium tracking-wider uppercase text-white leading-snug whitespace-nowrap">
           Sito in allestimento
         </span>
       </div>
@@ -421,7 +469,7 @@
           <span>Facebook</span>
         </a>
 
-        <button type="button" onclick="toggleWritePopup(true)"
+        <button type="button" onclick="openMainPopup('write')"
            class="cta-btn btn-shimmer bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-lg shadow-black/40 border border-white/15 px-6 py-2.5 rounded-full flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold tracking-wide cursor-pointer group">
           <svg class="w-4 h-4 shrink-0 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -464,87 +512,163 @@
     </footer>
   </div>
 
-  <!-- Popup Compilazione Form Contatti con Animazione Stile Apple -->
-  <div id="write-popup" class="apple-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-    <div class="apple-popup-card rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left">
-      <button type="button" onclick="toggleWritePopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi popup">
+  <!-- Modale Unificato "Chi Siamo" / "Scrivici" con Morphing Elastico stile Apple -->
+  <div id="main-popup" class="apple-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="main-popup-label">
+    <div id="main-popup-card" class="apple-popup-card rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left overflow-hidden">
+      <button type="button" onclick="closeMainPopup()" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi finestra">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
 
-      <div class="popup-stagger popup-stagger-1">
-        <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Scrivici</span>
-        <h2 id="popup-title" class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-2 pr-8">Parla con il Direttivo</h2>
-        <p class="text-xs sm:text-sm text-white/85 font-light leading-relaxed mb-4">
-          Hai un’idea per il paese o vuoi dare una mano alla Pro Loco? Compila il modulo qui sotto: il tuo messaggio arriverà direttamente al direttivo.
-        </p>
-      </div>
-
-      <form id="proloco-contact-form" action="https://formsubmit.co/prolocoscb.pv@proton.me" method="POST" class="space-y-3">
-        <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Pro Loco Santa Cristina e Bissone" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
-
-        <div class="popup-stagger popup-stagger-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label for="sender-name" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Nome o Cognome</label>
-            <input id="sender-name" name="Nome" type="text" required placeholder="Il tuo nome"
-                   class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm" />
+      <div id="morph-body" class="morph-body">
+        <!-- Vista 1: Chi Siamo & Dati Ufficiali -->
+        <div id="view-about" class="modal-view-panel">
+          <div class="popup-stagger popup-stagger-1 flex items-center gap-3.5 mb-4 pr-8">
+            <div class="w-12 h-12 shrink-0 rounded-full overflow-hidden border border-white/25 bg-[#0012B8] flex items-center justify-center shadow-md">
+              <img src="logo.png" onerror="this.onerror=null;this.src='logo.jpg';" alt="Stemma Pro Loco" class="w-full h-full object-contain p-0.5 block" />
+            </div>
+            <div>
+              <span class="block text-[10px] uppercase tracking-[0.25em] text-platano-light font-semibold">Chi Siamo</span>
+              <h2 id="main-popup-label" class="font-serif text-xl sm:text-2xl font-semibold leading-tight text-white">Pro Loco di Santa Cristina e Bissone</h2>
+            </div>
           </div>
-          <div>
-            <label for="sender-email" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">La tua Email</label>
-            <input id="sender-email" name="Email" type="email" required placeholder="nome@esempio.it"
-                   class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm" />
+
+          <p class="popup-stagger popup-stagger-2 text-xs sm:text-sm text-white/85 font-light leading-relaxed mb-5">
+            Nata dall’impegno di cittadini e volontari del territorio, l’associazione promuove la vita sociale, le tradizioni, la cultura e le eccellenze locali di <strong class="font-medium text-white">Santa Cristina e Bissone</strong>, in provincia di Pavia.
+          </p>
+
+          <!-- Scheda Anagrafica e Istituzionale -->
+          <div class="popup-stagger popup-stagger-3 rounded-xl bg-white/[0.05] border border-white/15 divide-y divide-white/10 text-xs sm:text-[13px]">
+            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <span class="text-[10px] uppercase tracking-widest text-white/60">Presidente</span>
+              <span class="font-semibold text-white">Donovan Bordoni</span>
+            </div>
+
+            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <span class="text-[10px] uppercase tracking-widest text-white/60">Denominazione</span>
+              <span class="font-medium text-white text-left sm:text-right">Pro Loco di Santa Cristina e Bissone</span>
+            </div>
+
+            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <span class="text-[10px] uppercase tracking-widest text-white/60">Sede Legale</span>
+              <span class="text-white/90 text-left sm:text-right">Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV)</span>
+            </div>
+
+            <div class="px-4 py-3 grid grid-cols-2 gap-3">
+              <div>
+                <span class="block text-[10px] uppercase tracking-widest text-white/60 mb-0.5">Codice Fiscale</span>
+                <span class="font-mono text-white/95 tracking-wide">90010240183</span>
+              </div>
+              <div>
+                <span class="block text-[10px] uppercase tracking-widest text-white/60 mb-0.5">Partita IVA</span>
+                <span class="font-mono text-white/95 tracking-wide">03048290187</span>
+              </div>
+            </div>
+
+            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <span class="text-[10px] uppercase tracking-widest text-white/60">Contatto Diretto</span>
+              <a href="mailto:prolocoscb.pv@proton.me" class="text-platano-light hover:underline font-medium">prolocoscb.pv@proton.me</a>
+            </div>
+          </div>
+
+          <div class="popup-stagger popup-stagger-4 mt-5 pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
+            <button type="button" onclick="morphPopupView('write', 'Disponibilità ad aiutare la Pro Loco')"
+                    class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs px-4 py-2 rounded-full cursor-pointer">
+              Collabora con noi
+            </button>
+            <button type="button" onclick="closeMainPopup()"
+                    class="cta-btn bg-white/15 hover:bg-white/25 text-white font-medium text-xs px-5 py-2 rounded-full transition cursor-pointer">
+              Chiudi
+            </button>
           </div>
         </div>
 
-        <div class="popup-stagger popup-stagger-3">
-          <label for="sender-topic" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Come vuoi contattarci</label>
-          <select id="sender-topic" name="Motivo" class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm">
-            <option value="Proposta o idea per il paese" class="bg-navy-dark text-white">Ho un’idea o una proposta per il paese</option>
-            <option value="Disponibilità ad aiutare la Pro Loco" class="bg-navy-dark text-white">Voglio dare una mano o propormi come volontario</option>
-            <option value="Informazioni generali" class="bg-navy-dark text-white">Altra richiesta per il direttivo</option>
-          </select>
+        <!-- Vista 2: Modulo Contatti "Parla con il Direttivo" -->
+        <div id="view-write" class="modal-view-panel hidden">
+          <div class="popup-stagger popup-stagger-1">
+            <div class="flex items-center gap-2.5 pr-8">
+              <button id="back-to-about-btn" type="button" onclick="morphPopupView('about')"
+                      class="hidden items-center gap-1 text-[11px] font-medium text-white/75 hover:text-white bg-white/10 hover:bg-white/15 px-2.5 py-1 rounded-full transition cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+                <span>Chi siamo</span>
+              </button>
+              <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Scrivici</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold mt-1.5 mb-2 pr-8">Parla con il Direttivo</h2>
+            <p class="text-xs sm:text-sm text-white/85 font-light leading-relaxed mb-4">
+              Hai un’idea per il paese o vuoi dare una mano alla Pro Loco? Compila il modulo qui sotto: il tuo messaggio arriverà direttamente al direttivo.
+            </p>
+          </div>
+
+          <form id="proloco-contact-form" action="https://formsubmit.co/prolocoscb.pv@proton.me" method="POST" class="space-y-3">
+            <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Pro Loco Santa Cristina e Bissone" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+
+            <div class="popup-stagger popup-stagger-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="sender-name" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Nome o Cognome</label>
+                <input id="sender-name" name="Nome" type="text" required placeholder="Il tuo nome"
+                       class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm" />
+              </div>
+              <div>
+                <label for="sender-email" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">La tua Email</label>
+                <input id="sender-email" name="Email" type="email" required placeholder="nome@esempio.it"
+                       class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm" />
+              </div>
+            </div>
+
+            <div class="popup-stagger popup-stagger-3">
+              <label for="sender-topic" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Come vuoi contattarci</label>
+              <select id="sender-topic" name="Motivo" class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm">
+                <option value="Proposta o idea per il paese" class="bg-navy-dark text-white">Ho un’idea o una proposta per il paese</option>
+                <option value="Disponibilità ad aiutare la Pro Loco" class="bg-navy-dark text-white">Voglio dare una mano o propormi come volontario</option>
+                <option value="Informazioni generali" class="bg-navy-dark text-white">Altra richiesta per il direttivo</option>
+              </select>
+            </div>
+
+            <div class="popup-stagger popup-stagger-4">
+              <label for="sender-message" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Il tuo messaggio</label>
+              <textarea id="sender-message" name="Messaggio" rows="3" required
+                        placeholder="Raccontaci la tua idea o come vorresti aiutare la Pro Loco..."
+                        class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm resize-y"></textarea>
+            </div>
+
+            <div class="popup-stagger popup-stagger-4 pt-0.5">
+              <label class="flex items-start gap-2.5 cursor-pointer text-[11px] text-white/80 leading-snug">
+                <input id="privacy-consent" name="Consenso_Privacy" type="checkbox" required
+                       class="mt-0.5 h-3.5 w-3.5 rounded border-white/30 bg-navy-dark accent-platano-light shrink-0 cursor-pointer" />
+                <span>
+                  Ho letto l’<button type="button" onclick="togglePrivacyPopup(true)" class="text-platano-light underline hover:text-white transition cursor-pointer">Informativa Privacy</button> e acconsento al trattamento dei dati inseriti per ricevere risposta dal direttivo.
+                </span>
+              </label>
+            </div>
+
+            <div class="popup-stagger popup-stagger-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+              <span class="text-[11px] text-white/60">Destinatario: prolocoscb.pv@proton.me</span>
+              <button type="submit" id="submit-contact-btn"
+                      class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full cursor-pointer shrink-0">
+                Invia messaggio
+              </button>
+            </div>
+          </form>
+
+          <div id="form-feedback" class="hidden mt-3 rounded-xl px-3.5 py-2.5 text-xs leading-relaxed" role="status" aria-live="polite"></div>
+
+          <div class="mt-5 pt-3.5 border-t border-white/15 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/65">
+            <span>Via Vittorio Veneto 5 • 27010 Santa Cristina e Bissone (PV)</span>
+            <span>C.F. 90010240183</span>
+          </div>
         </div>
-
-        <div class="popup-stagger popup-stagger-4">
-          <label for="sender-message" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Il tuo messaggio</label>
-          <textarea id="sender-message" name="Messaggio" rows="3" required
-                    placeholder="Raccontaci la tua idea o come vorresti aiutare la Pro Loco..."
-                    class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm resize-y"></textarea>
-        </div>
-
-        <div class="popup-stagger popup-stagger-4 pt-0.5">
-          <label class="flex items-start gap-2.5 cursor-pointer text-[11px] text-white/80 leading-snug">
-            <input id="privacy-consent" name="Consenso_Privacy" type="checkbox" required
-                   class="mt-0.5 h-3.5 w-3.5 rounded border-white/30 bg-navy-dark accent-platano-light shrink-0 cursor-pointer" />
-            <span>
-              Ho letto l’<button type="button" onclick="togglePrivacyPopup(true)" class="text-platano-light underline hover:text-white transition cursor-pointer">Informativa Privacy</button> e acconsento al trattamento dei dati inseriti per ricevere risposta dal direttivo.
-            </span>
-          </label>
-        </div>
-
-        <div class="popup-stagger popup-stagger-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-          <span class="text-[11px] text-white/60">Destinatario: prolocoscb.pv@proton.me</span>
-          <button type="submit" id="submit-contact-btn"
-                  class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full cursor-pointer shrink-0">
-            Invia messaggio
-          </button>
-        </div>
-      </form>
-
-      <div id="form-feedback" class="hidden mt-3 rounded-xl px-3.5 py-2.5 text-xs leading-relaxed" role="status" aria-live="polite"></div>
-
-      <div class="mt-5 pt-3.5 border-t border-white/15 flex flex-wrap items-center justify-between gap-2 text-[11px] text-white/65">
-        <span>Via Vittorio Veneto 5 • 27010 Santa Cristina e Bissone (PV)</span>
-        <span>C.F. 90010240183</span>
       </div>
     </div>
   </div>
 
   <!-- Popup Informativa Privacy (Art. 13 GDPR) -->
-  <div id="privacy-popup" class="apple-backdrop fixed inset-0 z-[60] hidden items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+  <div id="privacy-popup" class="apple-backdrop fixed inset-0 z-[60] flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="privacy-title">
     <div class="apple-popup-card rounded-2xl max-w-xl w-full p-5 sm:p-7 relative text-white my-auto text-left">
       <button type="button" onclick="togglePrivacyPopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi informativa">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -719,9 +843,8 @@
       slideInterval = setInterval(() => goToSlide(currentIndex + 1), SLIDE_DURATION);
     }
 
-    // Supporto Swipe Touch su iPad/Smartphone e Frecce Tastiera
+    // Supporto Swipe Touch su iPad/Smartphone
     let touchStartX = 0;
-    let touchEndX = 0;
     const swipeArea = document.getElementById('swipe-area');
 
     swipeArea.addEventListener('touchstart', (e) => {
@@ -729,79 +852,183 @@
     }, { passive: true });
 
     swipeArea.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
+      const diff = touchStartX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 55) {
         goToSlide(diff > 0 ? currentIndex + 1 : currentIndex - 1);
       }
     }, { passive: true });
 
-    // Gestione Modali con Scroll Lock
-    let closePopupTimer = null;
-    let closePrivacyTimer = null;
+    // Gestione Modali con Morphing Elastico e Altezza Interpolata
+    const modalTimers = {};
+    let currentMainView = 'about';
+    let isMorphing = false;
 
-    function syncBodyScrollLock() {
-      const writeOpen = !document.getElementById('write-popup').classList.contains('hidden');
-      const privacyOpen = !document.getElementById('privacy-popup').classList.contains('hidden');
-      document.body.classList.toggle('modal-open', writeOpen || privacyOpen);
+    function isModalOpen(modalId) {
+      const el = document.getElementById(modalId);
+      return el && el.classList.contains('is-open');
     }
 
-    function toggleWritePopup(show) {
-      const popup = document.getElementById('write-popup');
-      if (closePopupTimer) {
-        clearTimeout(closePopupTimer);
-        closePopupTimer = null;
+    function syncBodyScrollLock() {
+      const anyOpen = ['main-popup', 'privacy-popup'].some(isModalOpen);
+      document.body.classList.toggle('modal-open', anyOpen);
+    }
+
+    function setMainPopupViewImmediate(viewName, presetTopic) {
+      const aboutView = document.getElementById('view-about');
+      const writeView = document.getElementById('view-write');
+      const backBtn = document.getElementById('back-to-about-btn');
+      const morphBody = document.getElementById('morph-body');
+
+      morphBody.style.height = '';
+      currentMainView = viewName;
+
+      if (viewName === 'about') {
+        aboutView.classList.remove('hidden', 'is-overlay-exit', 'is-entering');
+        writeView.classList.add('hidden');
+        writeView.classList.remove('is-overlay-exit', 'is-entering');
+        backBtn.classList.add('hidden');
+        backBtn.classList.remove('inline-flex');
+      } else {
+        writeView.classList.remove('hidden', 'is-overlay-exit', 'is-entering');
+        aboutView.classList.add('hidden');
+        aboutView.classList.remove('is-overlay-exit', 'is-entering');
+
+        if (presetTopic) {
+          const topicSelect = document.getElementById('sender-topic');
+          if (topicSelect) topicSelect.value = presetTopic;
+          backBtn.classList.remove('hidden');
+          backBtn.classList.add('inline-flex');
+        } else {
+          backBtn.classList.add('hidden');
+          backBtn.classList.remove('inline-flex');
+        }
+      }
+    }
+
+    function openMainPopup(viewName, presetTopic) {
+      const popup = document.getElementById('main-popup');
+      if (!popup) return;
+
+      if (modalTimers['main-popup']) {
+        clearTimeout(modalTimers['main-popup']);
+        delete modalTimers['main-popup'];
       }
 
-      if (show) {
-        popup.classList.remove('hidden', 'is-closing');
-        popup.classList.add('flex');
+      setMainPopupViewImmediate(viewName, presetTopic);
+
+      popup.classList.remove('is-closing');
+      popup.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => {
+        popup.classList.add('is-open');
         syncBodyScrollLock();
-        void popup.offsetWidth;
-        requestAnimationFrame(() => popup.classList.add('is-open'));
+      });
+
+      if (viewName === 'write') {
         setTimeout(() => {
           const nameInput = document.getElementById('sender-name');
           if (nameInput) nameInput.focus();
-        }, 160);
-      } else {
-        if (popup.classList.contains('hidden')) return;
-        popup.classList.remove('is-open');
-        popup.classList.add('is-closing');
-        closePopupTimer = setTimeout(() => {
-          popup.classList.add('hidden');
-          popup.classList.remove('flex', 'is-closing');
-          syncBodyScrollLock();
-        }, 300);
+        }, 220);
       }
+    }
+
+    function closeMainPopup() {
+      const popup = document.getElementById('main-popup');
+      if (!popup || !popup.classList.contains('is-open')) return;
+
+      popup.classList.remove('is-open');
+      popup.classList.add('is-closing');
+      popup.setAttribute('aria-hidden', 'true');
+      modalTimers['main-popup'] = setTimeout(() => {
+        popup.classList.remove('is-closing');
+        document.getElementById('morph-body').style.height = '';
+        syncBodyScrollLock();
+      }, 280);
+    }
+
+    // Morphing continuo con dissolvenza incrociata sovrapposta e interpolazione altezza
+    function morphPopupView(targetView, presetTopic) {
+      if (isMorphing || currentMainView === targetView) return;
+      isMorphing = true;
+
+      const morphBody = document.getElementById('morph-body');
+      const outgoing = document.getElementById(currentMainView === 'about' ? 'view-about' : 'view-write');
+      const incoming = document.getElementById(targetView === 'about' ? 'view-about' : 'view-write');
+      const backBtn = document.getElementById('back-to-about-btn');
+
+      // 1. Blocca l'altezza iniziale in pixel
+      const startHeight = morphBody.offsetHeight;
+      morphBody.style.height = `${startHeight}px`;
+
+      // 2. Configura la vista entrante e misurane l'altezza reale
+      if (targetView === 'write') {
+        if (presetTopic) {
+          const topicSelect = document.getElementById('sender-topic');
+          if (topicSelect) topicSelect.value = presetTopic;
+        }
+        backBtn.classList.remove('hidden');
+        backBtn.classList.add('inline-flex');
+      } else {
+        backBtn.classList.add('hidden');
+        backBtn.classList.remove('inline-flex');
+      }
+
+      incoming.classList.remove('hidden');
+      incoming.classList.add('is-entering');
+      const targetHeight = incoming.offsetHeight;
+
+      // 3. Avvia simultaneamente: uscita in overlay, entrata e morphing altezza
+      outgoing.classList.add('is-overlay-exit');
+
+      requestAnimationFrame(() => {
+        morphBody.style.height = `${targetHeight}px`;
+        incoming.classList.remove('is-entering');
+      });
+
+      currentMainView = targetView;
+
+      setTimeout(() => {
+        outgoing.classList.add('hidden');
+        outgoing.classList.remove('is-overlay-exit');
+        morphBody.style.height = '';
+        isMorphing = false;
+
+        if (targetView === 'write') {
+          const nameInput = document.getElementById('sender-name');
+          if (nameInput) nameInput.focus();
+        }
+      }, 390);
     }
 
     function togglePrivacyPopup(show) {
       const popup = document.getElementById('privacy-popup');
-      if (closePrivacyTimer) {
-        clearTimeout(closePrivacyTimer);
-        closePrivacyTimer = null;
+      if (!popup) return;
+
+      if (modalTimers['privacy-popup']) {
+        clearTimeout(modalTimers['privacy-popup']);
+        delete modalTimers['privacy-popup'];
       }
 
       if (show) {
-        popup.classList.remove('hidden', 'is-closing');
-        popup.classList.add('flex');
-        syncBodyScrollLock();
-        void popup.offsetWidth;
-        requestAnimationFrame(() => popup.classList.add('is-open'));
+        popup.classList.remove('is-closing');
+        popup.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => {
+          popup.classList.add('is-open');
+          syncBodyScrollLock();
+        });
       } else {
-        if (popup.classList.contains('hidden')) return;
+        if (!popup.classList.contains('is-open')) return;
         popup.classList.remove('is-open');
         popup.classList.add('is-closing');
-        closePrivacyTimer = setTimeout(() => {
-          popup.classList.add('hidden');
-          popup.classList.remove('flex', 'is-closing');
+        popup.setAttribute('aria-hidden', 'true');
+        modalTimers['privacy-popup'] = setTimeout(() => {
+          popup.classList.remove('is-closing');
           syncBodyScrollLock();
-        }, 300);
+        }, 280);
       }
     }
 
-    document.getElementById('write-popup').addEventListener('click', (e) => {
-      if (e.target.id === 'write-popup') toggleWritePopup(false);
+    document.getElementById('main-popup').addEventListener('click', (e) => {
+      if (e.target.id === 'main-popup') closeMainPopup();
     });
 
     document.getElementById('privacy-popup').addEventListener('click', (e) => {
@@ -809,17 +1036,15 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      const privacyPopup = document.getElementById('privacy-popup');
-      const writePopup = document.getElementById('write-popup');
-      const isModalOpen = !privacyPopup.classList.contains('hidden') || !writePopup.classList.contains('hidden');
+      const anyOpen = isModalOpen('privacy-popup') || isModalOpen('main-popup');
 
       if (e.key === 'Escape') {
-        if (!privacyPopup.classList.contains('hidden')) {
+        if (isModalOpen('privacy-popup')) {
           togglePrivacyPopup(false);
-        } else {
-          toggleWritePopup(false);
+        } else if (isModalOpen('main-popup')) {
+          closeMainPopup();
         }
-      } else if (!isModalOpen && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+      } else if (!anyOpen && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
         goToSlide(e.key === 'ArrowRight' ? currentIndex + 1 : currentIndex - 1);
       }
     });
@@ -866,3 +1091,4 @@
   </script>
 </body>
 </html>
+```
