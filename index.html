@@ -34,34 +34,69 @@
     "vatID": "IT03048290187",
     "founder": {
       "@type": "Person",
-      "name": "Donovan Bordoni",
-      "jobTitle": "Presidente"
+      "name": "Donovan Giuseppe Bordoni",
+      "jobTitle": "Presidente della Pro Loco"
     },
     "member": [
       {
         "@type": "Person",
-        "name": "Donovan Bordoni",
-        "jobTitle": "Presidente"
+        "name": "Donovan Giuseppe Bordoni",
+        "jobTitle": "Presidente della Pro Loco"
       },
       {
         "@type": "Person",
         "name": "Pieralba Tosi",
-        "jobTitle": "Vicepresidente"
+        "jobTitle": "Vicepresidente del Consiglio di Amministrazione"
       },
       {
         "@type": "Person",
         "name": "Sara Migliazza",
-        "jobTitle": "Segretaria"
+        "jobTitle": "Segretaria del Consiglio di Amministrazione"
       },
       {
         "@type": "Person",
         "name": "Marco Mascheroni",
-        "jobTitle": "Tesoriere"
+        "jobTitle": "Tesoriere del Consiglio di Amministrazione"
+      },
+      {
+        "@type": "Person",
+        "name": "Cristina Magnani",
+        "jobTitle": "Consigliere del Consiglio di Amministrazione"
+      },
+      {
+        "@type": "Person",
+        "name": "Alessandro Bordoni",
+        "jobTitle": "Consigliere del Consiglio di Amministrazione"
+      },
+      {
+        "@type": "Person",
+        "name": "Paolo Mottini",
+        "jobTitle": "Consigliere del Consiglio di Amministrazione"
+      },
+      {
+        "@type": "Person",
+        "name": "Fiorella Tinelli",
+        "jobTitle": "Consigliere del Consiglio di Amministrazione"
+      },
+      {
+        "@type": "Person",
+        "name": "Giovanna Mastropietro",
+        "jobTitle": "Consigliere del Consiglio di Amministrazione"
       },
       {
         "@type": "Person",
         "name": "Loris Dordoni",
-        "jobTitle": "Presidente del Collegio dei Revisori dei Conti"
+        "jobTitle": "Presidente del Collegio dei Revisori dei Conti – Membro Effettivo"
+      },
+      {
+        "@type": "Person",
+        "name": "Gianluigi Tacchini",
+        "jobTitle": "Membro Effettivo del Collegio dei Revisori dei Conti"
+      },
+      {
+        "@type": "Person",
+        "name": "Cristofer Mottini",
+        "jobTitle": "Membro Effettivo del Collegio dei Revisori dei Conti"
       }
     ],
     "address": {
@@ -163,6 +198,22 @@
         min-width: 2.75rem;
         min-height: 2.75rem;
       }
+    }
+
+    /* Scrollbar discreta per elenchi lunghi nei modali */
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.22);
+      border-radius: 9999px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: rgba(52, 168, 83, 0.65);
     }
 
     @keyframes kenBurnsSlow {
@@ -573,7 +624,7 @@
     </footer>
   </div>
 
-  <!-- Modale Unificato "Chi Siamo" / "Direttivo" / "Scrivici" con Morphing Elastico stile Apple -->
+  <!-- Modale Unificato "Chi Siamo" / "Organi Sociali" / "Scrivici" con Morphing Elastico stile Apple -->
   <div id="main-popup" class="apple-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="main-popup-label">
     <div id="main-popup-card" class="apple-popup-card rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left overflow-hidden">
       <button type="button" onclick="closeMainPopup()" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi finestra">
@@ -601,23 +652,23 @@
 
           <!-- Scheda Anagrafica e Istituzionale Strutturata -->
           <div class="popup-stagger popup-stagger-3 space-y-2.5 text-xs">
-            <!-- Blocco Direttivo & Sede -->
+            <!-- Blocco Presidente & Sede -->
             <div class="rounded-xl bg-white/[0.045] border border-white/15 p-3.5 space-y-3">
-              <div class="flex items-start justify-between gap-3">
-                <div class="flex items-center gap-2.5">
+              <div class="flex items-start justify-between gap-2.5">
+                <div class="flex items-center gap-2.5 min-w-0">
                   <span class="w-7 h-7 rounded-lg bg-platano-light/15 border border-platano-light/30 flex items-center justify-center text-platano-light shrink-0">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
                   </span>
-                  <div>
-                    <span class="block text-[10px] uppercase tracking-widest text-white/55">Presidente</span>
-                    <span class="font-semibold text-white text-sm">Donovan Bordoni</span>
+                  <div class="min-w-0">
+                    <span class="block text-[10px] uppercase tracking-widest text-white/55">Presidente della Pro Loco</span>
+                    <span class="font-semibold text-white text-[13.5px] sm:text-sm leading-snug block">Donovan Giuseppe Bordoni</span>
                   </div>
                 </div>
                 <button type="button" onclick="morphPopupView('board')"
-                        class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-platano-light/15 hover:bg-platano-light/25 text-white hover:text-white border border-platano-light/40 hover:border-platano-light inline-flex items-center gap-1 transition active:scale-95 cursor-pointer shrink-0 group">
-                  <span>Direttivo</span>
+                        class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-platano-light/15 hover:bg-platano-light/25 text-white border border-platano-light/40 hover:border-platano-light inline-flex items-center gap-1 transition active:scale-95 cursor-pointer shrink-0 group">
+                  <span>Organi Sociali</span>
                   <svg class="w-3 h-3 text-platano-light transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
@@ -686,7 +737,7 @@
           </div>
         </div>
 
-        <!-- Vista 2: Organigramma Direttivo Completo -->
+        <!-- Vista 2: Organi Sociali Statutari (Consiglio di Amministrazione & Collegio dei Revisori dei Conti) -->
         <div id="view-board" class="modal-view-panel hidden">
           <div class="popup-stagger popup-stagger-1">
             <div class="flex items-center gap-2.5 pr-8">
@@ -697,83 +748,168 @@
                 </svg>
                 <span>Chi siamo</span>
               </button>
-              <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Cariche Sociali</span>
+              <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Organi Sociali</span>
             </div>
-            <h2 class="font-serif text-2xl sm:text-3xl font-semibold mt-1.5 mb-1.5 pr-8">Il Direttivo</h2>
-            <p class="text-xs sm:text-[13px] text-white/80 font-light leading-relaxed mb-4">
-              I componenti del Consiglio Direttivo e degli organi di controllo della Pro Loco di Santa Cristina e Bissone.
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold mt-1.5 mb-1 pr-8">Cariche Istituzionali</h2>
+            <p class="text-xs text-white/75 font-light leading-relaxed mb-3.5">
+              Composizione ufficiale del Consiglio di Amministrazione e del Collegio dei Revisori dei Conti.
             </p>
           </div>
 
-          <div class="popup-stagger popup-stagger-2 rounded-xl bg-white/[0.045] border border-white/15 divide-y divide-white/10 text-xs">
-            <!-- Presidente -->
-            <div class="p-3.5 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <span class="w-8 h-8 rounded-full bg-platano-light/20 border border-platano-light/40 text-platano-light font-serif font-bold text-xs flex items-center justify-center shrink-0">
-                  DB
-                </span>
-                <div class="min-w-0">
-                  <span class="block font-semibold text-white text-[13.5px] truncate">Donovan Bordoni</span>
-                  <span class="block text-[11px] text-platano-light font-medium">Presidente</span>
+          <div class="popup-stagger popup-stagger-2 max-h-[52vh] overflow-y-auto custom-scroll pr-1 space-y-3.5 text-xs">
+            <!-- Sezione 1: Consiglio di Amministrazione -->
+            <div>
+              <div class="flex items-center justify-between px-1 mb-1.5">
+                <span class="text-[10px] uppercase tracking-[0.2em] text-platano-light font-semibold">Consiglio di Amministrazione</span>
+                <span class="text-[10px] text-white/45">9 componenti</span>
+              </div>
+
+              <div class="rounded-xl bg-white/[0.045] border border-white/15 divide-y divide-white/10">
+                <!-- Presidente della Pro Loco -->
+                <div class="p-3 flex items-center justify-between gap-2.5 bg-platano-light/[0.06]">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <span class="w-7 h-7 rounded-full bg-platano-light/20 border border-platano-light/40 text-platano-light font-serif font-bold text-[11px] flex items-center justify-center shrink-0">
+                      DB
+                    </span>
+                    <div class="min-w-0">
+                      <span class="block font-semibold text-white text-[13px] truncate">Donovan Giuseppe Bordoni</span>
+                      <span class="block text-[11px] text-platano-light font-medium">Presidente della Pro Loco</span>
+                    </div>
+                  </div>
+                  <span class="w-2 h-2 rounded-full bg-platano-gold shrink-0" aria-hidden="true"></span>
+                </div>
+
+                <!-- Vicepresidente -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    PT
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Pieralba Tosi</span>
+                    <span class="block text-[11px] text-white/70">Vicepresidente</span>
+                  </div>
+                </div>
+
+                <!-- Segretaria -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    SM
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Sara Migliazza</span>
+                    <span class="block text-[11px] text-white/70">Segretaria</span>
+                  </div>
+                </div>
+
+                <!-- Tesoriere -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    MM
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Marco Mascheroni</span>
+                    <span class="block text-[11px] text-white/70">Tesoriere</span>
+                  </div>
+                </div>
+
+                <!-- Consiglieri -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    CM
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Cristina Magnani</span>
+                    <span class="block text-[11px] text-white/70">Consigliere</span>
+                  </div>
+                </div>
+
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    AB
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Alessandro Bordoni</span>
+                    <span class="block text-[11px] text-white/70">Consigliere</span>
+                  </div>
+                </div>
+
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    PM
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Paolo Mottini</span>
+                    <span class="block text-[11px] text-white/70">Consigliere</span>
+                  </div>
+                </div>
+
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    FT
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Fiorella Tinelli</span>
+                    <span class="block text-[11px] text-white/70">Consigliere</span>
+                  </div>
+                </div>
+
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    GM
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Giovanna Mastropietro</span>
+                    <span class="block text-[11px] text-white/70">Consigliere</span>
+                  </div>
                 </div>
               </div>
-              <span class="w-2 h-2 rounded-full bg-platano-gold shrink-0" aria-hidden="true"></span>
             </div>
 
-            <!-- Vicepresidente -->
-            <div class="p-3.5 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
-                  PT
-                </span>
-                <div class="min-w-0">
-                  <span class="block font-semibold text-white text-[13.5px] truncate">Pieralba Tosi</span>
-                  <span class="block text-[11px] text-white/70">Vicepresidente</span>
-                </div>
+            <!-- Sezione 2: Collegio dei Revisori dei Conti -->
+            <div>
+              <div class="flex items-center justify-between px-1 mb-1.5">
+                <span class="text-[10px] uppercase tracking-[0.2em] text-platano-gold font-semibold">Collegio dei Revisori dei Conti</span>
+                <span class="text-[10px] text-white/45">3 componenti</span>
               </div>
-            </div>
 
-            <!-- Segretaria -->
-            <div class="p-3.5 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
-                  SM
-                </span>
-                <div class="min-w-0">
-                  <span class="block font-semibold text-white text-[13.5px] truncate">Sara Migliazza</span>
-                  <span class="block text-[11px] text-white/70">Segretaria</span>
+              <div class="rounded-xl bg-white/[0.045] border border-white/15 divide-y divide-white/10">
+                <!-- Presidente del Collegio – Membro Effettivo -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-platano-gold/15 border border-platano-gold/40 text-platano-gold font-serif font-bold text-[11px] flex items-center justify-center shrink-0">
+                    LD
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Loris Dordoni</span>
+                    <span class="block text-[11px] text-white/75 leading-snug">Presidente del Collegio</span>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- Tesoriere -->
-            <div class="p-3.5 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
-                  MM
-                </span>
-                <div class="min-w-0">
-                  <span class="block font-semibold text-white text-[13.5px] truncate">Marco Mascheroni</span>
-                  <span class="block text-[11px] text-white/70">Tesoriere</span>
+                <!-- Membro Effettivo -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    GT
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Gianluigi Tacchini</span>
+                    <span class="block text-[11px] text-white/70">Membro Effettivo</span>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <!-- Presidente Collegio Revisori dei Conti -->
-            <div class="p-3.5 flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
-                  LD
-                </span>
-                <div class="min-w-0">
-                  <span class="block font-semibold text-white text-[13.5px] truncate">Loris Dordoni</span>
-                  <span class="block text-[11px] text-white/70 leading-snug">Presidente del Collegio dei Revisori dei Conti</span>
+                <!-- Membro Effettivo -->
+                <div class="p-3 flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-[11px] flex items-center justify-center shrink-0">
+                    CM
+                  </span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-white text-[13px] truncate">Cristofer Mottini</span>
+                    <span class="block text-[11px] text-white/70">Membro Effettivo</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="popup-stagger popup-stagger-3 mt-5 pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
+          <div class="popup-stagger popup-stagger-3 mt-4 pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
             <button type="button" onclick="morphPopupView('write', 'Disponibilità ad aiutare la Pro Loco')"
                     class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-md shadow-black/30 border border-white/15 font-semibold text-xs px-5 py-2.5 rounded-full inline-flex items-center gap-1.5 cursor-pointer">
               <span>Collabora con noi</span>
@@ -883,7 +1019,7 @@
       <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Trasparenza &amp; GDPR</span>
       <h2 id="privacy-title" class="font-serif text-2xl sm:text-3xl font-semibold mt-1 mb-3 pr-8">Informativa sulla Privacy</h2>
 
-      <div class="space-y-3 text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-[60vh] overflow-y-auto pr-1">
+      <div class="space-y-3 text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-[60vh] overflow-y-auto custom-scroll pr-1">
         <p>
           <strong class="font-semibold text-white">1. Titolare del trattamento:</strong><br />
           <strong>Pro Loco di Santa Cristina e Bissone</strong> (Associazione non riconosciuta), con sede legale in Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV) — C.F. 90010240183 — P.IVA 03048290187 — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span> — PEC: <span class="text-white">prolocoscb.pv@ionospec.it</span>.
