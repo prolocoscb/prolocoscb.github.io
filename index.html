@@ -6,6 +6,7 @@
   <title>Pro Loco di Santa Cristina e Bissone (PV)</title>
   <meta name="description" content="Sito ufficiale della Pro Loco di Santa Cristina e Bissone (PV) — Eventi, cultura, gastronomia e valorizzazione del territorio." />
   <meta name="theme-color" content="#00112B" />
+  <link rel="canonical" href="https://prolocoscb.github.io/" />
 
   <!-- Favicon & Apple Touch Icon -->
   <link rel="icon" type="image/png" href="logo.png" />
@@ -14,9 +15,69 @@
   <!-- Open Graph / Anteprima Social & WhatsApp -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="it_IT" />
+  <meta property="og:site_name" content="Pro Loco di Santa Cristina e Bissone" />
+  <meta property="og:url" content="https://prolocoscb.github.io/" />
   <meta property="og:title" content="Pro Loco di Santa Cristina e Bissone" />
   <meta property="og:description" content="Iniziative culturali, gastronomiche e di valorizzazione del territorio a Santa Cristina e Bissone (PV)." />
-  <meta property="og:image" content="logo.png" />
+  <meta property="og:image" content="https://prolocoscb.github.io/logo.png" />
+
+  <!-- Dati Strutturati JSON-LD (Schema.org per SEO Locale) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pro Loco di Santa Cristina e Bissone",
+    "url": "https://prolocoscb.github.io/",
+    "logo": "https://prolocoscb.github.io/logo.png",
+    "email": "prolocoscb.pv@proton.me",
+    "taxID": "90010240183",
+    "vatID": "IT03048290187",
+    "founder": {
+      "@type": "Person",
+      "name": "Donovan Bordoni",
+      "jobTitle": "Presidente"
+    },
+    "member": [
+      {
+        "@type": "Person",
+        "name": "Donovan Bordoni",
+        "jobTitle": "Presidente"
+      },
+      {
+        "@type": "Person",
+        "name": "Pieralba Tosi",
+        "jobTitle": "Vicepresidente"
+      },
+      {
+        "@type": "Person",
+        "name": "Sara Migliazza",
+        "jobTitle": "Segretaria"
+      },
+      {
+        "@type": "Person",
+        "name": "Marco Mascheroni",
+        "jobTitle": "Tesoriere"
+      },
+      {
+        "@type": "Person",
+        "name": "Loris Dordoni",
+        "jobTitle": "Presidente del Collegio dei Revisori dei Conti"
+      }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via Vittorio Veneto 5",
+      "addressLocality": "Santa Cristina e Bissone",
+      "addressRegion": "PV",
+      "postalCode": "27010",
+      "addressCountry": "IT"
+    },
+    "sameAs": [
+      "https://www.instagram.com/prolocoscb",
+      "https://www.facebook.com/prolocoscb"
+    ]
+  }
+  </script>
 
   <!-- Preload Prima Immagine Carosello per Caricamento Istantaneo -->
   <link rel="preload" as="image" href="IMG_0119.jpeg" />
@@ -512,7 +573,7 @@
     </footer>
   </div>
 
-  <!-- Modale Unificato "Chi Siamo" / "Scrivici" con Morphing Elastico stile Apple -->
+  <!-- Modale Unificato "Chi Siamo" / "Direttivo" / "Scrivici" con Morphing Elastico stile Apple -->
   <div id="main-popup" class="apple-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="main-popup-label">
     <div id="main-popup-card" class="apple-popup-card rounded-2xl max-w-lg w-full p-5 sm:p-7 relative text-white my-auto text-left overflow-hidden">
       <button type="button" onclick="closeMainPopup()" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi finestra">
@@ -524,7 +585,7 @@
       <div id="morph-body" class="morph-body">
         <!-- Vista 1: Chi Siamo & Dati Ufficiali -->
         <div id="view-about" class="modal-view-panel">
-          <div class="popup-stagger popup-stagger-1 flex items-center gap-3.5 mb-4 pr-8">
+          <div class="popup-stagger popup-stagger-1 flex items-center gap-3.5 mb-3.5 pr-8">
             <div class="w-12 h-12 shrink-0 rounded-full overflow-hidden border border-white/25 bg-[#0012B8] flex items-center justify-center shadow-md">
               <img src="logo.png" onerror="this.onerror=null;this.src='logo.jpg';" alt="Stemma Pro Loco" class="w-full h-full object-contain p-0.5 block" />
             </div>
@@ -534,57 +595,200 @@
             </div>
           </div>
 
-          <p class="popup-stagger popup-stagger-2 text-xs sm:text-sm text-white/85 font-light leading-relaxed mb-5">
+          <p class="popup-stagger popup-stagger-2 text-xs sm:text-[13.5px] text-white/85 font-light leading-relaxed mb-4">
             Nata dall’impegno di cittadini e volontari del territorio, l’associazione promuove la vita sociale, le tradizioni, la cultura e le eccellenze locali di <strong class="font-medium text-white">Santa Cristina e Bissone</strong>, in provincia di Pavia.
           </p>
 
-          <!-- Scheda Anagrafica e Istituzionale -->
-          <div class="popup-stagger popup-stagger-3 rounded-xl bg-white/[0.05] border border-white/15 divide-y divide-white/10 text-xs sm:text-[13px]">
-            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <span class="text-[10px] uppercase tracking-widest text-white/60">Presidente</span>
-              <span class="font-semibold text-white">Donovan Bordoni</span>
-            </div>
-
-            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <span class="text-[10px] uppercase tracking-widest text-white/60">Denominazione</span>
-              <span class="font-medium text-white text-left sm:text-right">Pro Loco di Santa Cristina e Bissone</span>
-            </div>
-
-            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <span class="text-[10px] uppercase tracking-widest text-white/60">Sede Legale</span>
-              <span class="text-white/90 text-left sm:text-right">Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV)</span>
-            </div>
-
-            <div class="px-4 py-3 grid grid-cols-2 gap-3">
-              <div>
-                <span class="block text-[10px] uppercase tracking-widest text-white/60 mb-0.5">Codice Fiscale</span>
-                <span class="font-mono text-white/95 tracking-wide">90010240183</span>
+          <!-- Scheda Anagrafica e Istituzionale Strutturata -->
+          <div class="popup-stagger popup-stagger-3 space-y-2.5 text-xs">
+            <!-- Blocco Direttivo & Sede -->
+            <div class="rounded-xl bg-white/[0.045] border border-white/15 p-3.5 space-y-3">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-7 h-7 rounded-lg bg-platano-light/15 border border-platano-light/30 flex items-center justify-center text-platano-light shrink-0">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/55">Presidente</span>
+                    <span class="font-semibold text-white text-sm">Donovan Bordoni</span>
+                  </div>
+                </div>
+                <button type="button" onclick="morphPopupView('board')"
+                        class="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-platano-light/15 hover:bg-platano-light/25 text-white hover:text-white border border-platano-light/40 hover:border-platano-light inline-flex items-center gap-1 transition active:scale-95 cursor-pointer shrink-0 group">
+                  <span>Direttivo</span>
+                  <svg class="w-3 h-3 text-platano-light transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
-              <div>
-                <span class="block text-[10px] uppercase tracking-widest text-white/60 mb-0.5">Partita IVA</span>
-                <span class="font-mono text-white/95 tracking-wide">03048290187</span>
+
+              <div class="h-[1px] bg-white/10"></div>
+
+              <div class="flex items-start gap-2.5">
+                <span class="w-7 h-7 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-white/80 shrink-0 mt-0.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </span>
+                <div>
+                  <span class="block text-[10px] uppercase tracking-widest text-white/55">Sede Legale</span>
+                  <span class="text-white/95 font-medium leading-snug block">Via Vittorio Veneto 5</span>
+                  <span class="text-white/70 text-[11px]">27010 Santa Cristina e Bissone (PV)</span>
+                </div>
               </div>
             </div>
 
-            <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <span class="text-[10px] uppercase tracking-widest text-white/60">Contatto Diretto</span>
-              <a href="mailto:prolocoscb.pv@proton.me" class="text-platano-light hover:underline font-medium">prolocoscb.pv@proton.me</a>
+            <!-- Blocco Dati Fiscali (2 Colonne) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="rounded-xl bg-white/[0.045] border border-white/15 px-3.5 py-2.5">
+                <span class="block text-[10px] uppercase tracking-widest text-white/55 mb-0.5">Codice Fiscale</span>
+                <span class="font-mono text-[13px] font-medium text-white tracking-wide select-all">90010240183</span>
+              </div>
+              <div class="rounded-xl bg-white/[0.045] border border-white/15 px-3.5 py-2.5">
+                <span class="block text-[10px] uppercase tracking-widest text-white/55 mb-0.5">Partita IVA</span>
+                <span class="font-mono text-[13px] font-medium text-white tracking-wide select-all">03048290187</span>
+              </div>
+            </div>
+
+            <!-- Blocco Recapiti Ufficiali (Stile Uniforme) -->
+            <div class="rounded-xl bg-white/[0.045] border border-white/15 p-3.5 space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase tracking-widest text-white/55 shrink-0">Email</span>
+                <a href="mailto:prolocoscb.pv@proton.me" class="font-mono text-[12px] font-medium text-platano-light hover:text-white no-underline transition truncate">
+                  prolocoscb.pv@proton.me
+                </a>
+              </div>
+              <div class="h-[1px] bg-white/10"></div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase tracking-widest text-white/55 shrink-0">PEC</span>
+                <a href="mailto:prolocoscb.pv@ionospec.it" class="font-mono text-[12px] font-medium text-platano-light hover:text-white no-underline transition truncate">
+                  prolocoscb.pv@ionospec.it
+                </a>
+              </div>
             </div>
           </div>
 
           <div class="popup-stagger popup-stagger-4 mt-5 pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
             <button type="button" onclick="morphPopupView('write', 'Disponibilità ad aiutare la Pro Loco')"
-                    class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs px-4 py-2 rounded-full cursor-pointer">
-              Collabora con noi
+                    class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-md shadow-black/30 border border-white/15 font-semibold text-xs px-5 py-2.5 rounded-full inline-flex items-center gap-1.5 cursor-pointer">
+              <span>Collabora con noi</span>
+              <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </button>
             <button type="button" onclick="closeMainPopup()"
-                    class="cta-btn bg-white/15 hover:bg-white/25 text-white font-medium text-xs px-5 py-2 rounded-full transition cursor-pointer">
+                    class="cta-btn bg-white/15 hover:bg-white/25 text-white font-medium text-xs px-5 py-2.5 rounded-full transition cursor-pointer">
               Chiudi
             </button>
           </div>
         </div>
 
-        <!-- Vista 2: Modulo Contatti "Parla con il Direttivo" -->
+        <!-- Vista 2: Organigramma Direttivo Completo -->
+        <div id="view-board" class="modal-view-panel hidden">
+          <div class="popup-stagger popup-stagger-1">
+            <div class="flex items-center gap-2.5 pr-8">
+              <button type="button" onclick="morphPopupView('about')"
+                      class="inline-flex items-center gap-1 text-[11px] font-medium text-white/75 hover:text-white bg-white/10 hover:bg-white/15 px-2.5 py-1 rounded-full transition cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+                <span>Chi siamo</span>
+              </button>
+              <span class="text-[11px] uppercase tracking-[0.25em] text-platano-light font-semibold">Cariche Sociali</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-semibold mt-1.5 mb-1.5 pr-8">Il Direttivo</h2>
+            <p class="text-xs sm:text-[13px] text-white/80 font-light leading-relaxed mb-4">
+              I componenti del Consiglio Direttivo e degli organi di controllo della Pro Loco di Santa Cristina e Bissone.
+            </p>
+          </div>
+
+          <div class="popup-stagger popup-stagger-2 rounded-xl bg-white/[0.045] border border-white/15 divide-y divide-white/10 text-xs">
+            <!-- Presidente -->
+            <div class="p-3.5 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="w-8 h-8 rounded-full bg-platano-light/20 border border-platano-light/40 text-platano-light font-serif font-bold text-xs flex items-center justify-center shrink-0">
+                  DB
+                </span>
+                <div class="min-w-0">
+                  <span class="block font-semibold text-white text-[13.5px] truncate">Donovan Bordoni</span>
+                  <span class="block text-[11px] text-platano-light font-medium">Presidente</span>
+                </div>
+              </div>
+              <span class="w-2 h-2 rounded-full bg-platano-gold shrink-0" aria-hidden="true"></span>
+            </div>
+
+            <!-- Vicepresidente -->
+            <div class="p-3.5 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
+                  PT
+                </span>
+                <div class="min-w-0">
+                  <span class="block font-semibold text-white text-[13.5px] truncate">Pieralba Tosi</span>
+                  <span class="block text-[11px] text-white/70">Vicepresidente</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Segretaria -->
+            <div class="p-3.5 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
+                  SM
+                </span>
+                <div class="min-w-0">
+                  <span class="block font-semibold text-white text-[13.5px] truncate">Sara Migliazza</span>
+                  <span class="block text-[11px] text-white/70">Segretaria</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tesoriere -->
+            <div class="p-3.5 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
+                  MM
+                </span>
+                <div class="min-w-0">
+                  <span class="block font-semibold text-white text-[13.5px] truncate">Marco Mascheroni</span>
+                  <span class="block text-[11px] text-white/70">Tesoriere</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Presidente Collegio Revisori dei Conti -->
+            <div class="p-3.5 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3 min-w-0">
+                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 text-white/85 font-serif font-semibold text-xs flex items-center justify-center shrink-0">
+                  LD
+                </span>
+                <div class="min-w-0">
+                  <span class="block font-semibold text-white text-[13.5px] truncate">Loris Dordoni</span>
+                  <span class="block text-[11px] text-white/70 leading-snug">Presidente del Collegio dei Revisori dei Conti</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="popup-stagger popup-stagger-3 mt-5 pt-3.5 border-t border-white/15 flex items-center justify-between gap-3">
+            <button type="button" onclick="morphPopupView('write', 'Disponibilità ad aiutare la Pro Loco')"
+                    class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white shadow-md shadow-black/30 border border-white/15 font-semibold text-xs px-5 py-2.5 rounded-full inline-flex items-center gap-1.5 cursor-pointer">
+              <span>Collabora con noi</span>
+              <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+            <button type="button" onclick="closeMainPopup()"
+                    class="cta-btn bg-white/15 hover:bg-white/25 text-white font-medium text-xs px-5 py-2.5 rounded-full transition cursor-pointer">
+              Chiudi
+            </button>
+          </div>
+        </div>
+
+        <!-- Vista 3: Modulo Contatti "Parla con il Direttivo" -->
         <div id="view-write" class="modal-view-panel hidden">
           <div class="popup-stagger popup-stagger-1">
             <div class="flex items-center gap-2.5 pr-8">
@@ -682,7 +886,7 @@
       <div class="space-y-3 text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-[60vh] overflow-y-auto pr-1">
         <p>
           <strong class="font-semibold text-white">1. Titolare del trattamento:</strong><br />
-          <strong>Pro Loco di Santa Cristina e Bissone</strong> (Associazione non riconosciuta), con sede legale in Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV) — C.F. 90010240183 — P.IVA 03048290187 — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
+          <strong>Pro Loco di Santa Cristina e Bissone</strong> (Associazione non riconosciuta), con sede legale in Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV) — C.F. 90010240183 — P.IVA 03048290187 — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span> — PEC: <span class="text-white">prolocoscb.pv@ionospec.it</span>.
         </p>
         <p>
           <strong class="font-semibold text-white">2. Tipologia di dati raccolti, cookie e font:</strong><br />
@@ -694,7 +898,7 @@
         </p>
         <p>
           <strong class="font-semibold text-white">4. Conservazione e diritti dell’interessato:</strong><br />
-          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile esercitare i diritti previsti dagli artt. 15–22 del GDPR (accesso, rettifica, cancellazione, limitazione) scrivendo a <span class="text-platano-light">prolocoscb.pv@proton.me</span>.
+          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile esercitare i diritti previsti dagli artt. 15–22 del GDPR (accesso, rettifica, cancellazione, limitazione) scrivendo a <span class="text-platano-light">prolocoscb.pv@proton.me</span> o alla PEC <span class="text-white">prolocoscb.pv@ionospec.it</span>.
         </p>
       </div>
 
@@ -860,6 +1064,11 @@
 
     // Gestione Modali con Morphing Elastico e Altezza Interpolata
     const modalTimers = {};
+    const VIEW_IDS = {
+      about: 'view-about',
+      board: 'view-board',
+      write: 'view-write'
+    };
     let currentMainView = 'about';
     let isMorphing = false;
 
@@ -874,34 +1083,27 @@
     }
 
     function setMainPopupViewImmediate(viewName, presetTopic) {
-      const aboutView = document.getElementById('view-about');
-      const writeView = document.getElementById('view-write');
       const backBtn = document.getElementById('back-to-about-btn');
       const morphBody = document.getElementById('morph-body');
 
       morphBody.style.height = '';
       currentMainView = viewName;
 
-      if (viewName === 'about') {
-        aboutView.classList.remove('hidden', 'is-overlay-exit', 'is-entering');
-        writeView.classList.add('hidden');
-        writeView.classList.remove('is-overlay-exit', 'is-entering');
+      Object.entries(VIEW_IDS).forEach(([key, id]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.classList.remove('is-overlay-exit', 'is-entering');
+        el.classList.toggle('hidden', key !== viewName);
+      });
+
+      if (viewName === 'write' && presetTopic) {
+        const topicSelect = document.getElementById('sender-topic');
+        if (topicSelect) topicSelect.value = presetTopic;
+        backBtn.classList.remove('hidden');
+        backBtn.classList.add('inline-flex');
+      } else {
         backBtn.classList.add('hidden');
         backBtn.classList.remove('inline-flex');
-      } else {
-        writeView.classList.remove('hidden', 'is-overlay-exit', 'is-entering');
-        aboutView.classList.add('hidden');
-        aboutView.classList.remove('is-overlay-exit', 'is-entering');
-
-        if (presetTopic) {
-          const topicSelect = document.getElementById('sender-topic');
-          if (topicSelect) topicSelect.value = presetTopic;
-          backBtn.classList.remove('hidden');
-          backBtn.classList.add('inline-flex');
-        } else {
-          backBtn.classList.add('hidden');
-          backBtn.classList.remove('inline-flex');
-        }
       }
     }
 
@@ -947,19 +1149,17 @@
 
     // Morphing continuo con dissolvenza incrociata sovrapposta e interpolazione altezza
     function morphPopupView(targetView, presetTopic) {
-      if (isMorphing || currentMainView === targetView) return;
+      if (isMorphing || currentMainView === targetView || !VIEW_IDS[targetView]) return;
       isMorphing = true;
 
       const morphBody = document.getElementById('morph-body');
-      const outgoing = document.getElementById(currentMainView === 'about' ? 'view-about' : 'view-write');
-      const incoming = document.getElementById(targetView === 'about' ? 'view-about' : 'view-write');
+      const outgoing = document.getElementById(VIEW_IDS[currentMainView]);
+      const incoming = document.getElementById(VIEW_IDS[targetView]);
       const backBtn = document.getElementById('back-to-about-btn');
 
-      // 1. Blocca l'altezza iniziale in pixel
       const startHeight = morphBody.offsetHeight;
       morphBody.style.height = `${startHeight}px`;
 
-      // 2. Configura la vista entrante e misurane l'altezza reale
       if (targetView === 'write') {
         if (presetTopic) {
           const topicSelect = document.getElementById('sender-topic');
@@ -976,7 +1176,6 @@
       incoming.classList.add('is-entering');
       const targetHeight = incoming.offsetHeight;
 
-      // 3. Avvia simultaneamente: uscita in overlay, entrata e morphing altezza
       outgoing.classList.add('is-overlay-exit');
 
       requestAnimationFrame(() => {
@@ -1091,4 +1290,3 @@
   </script>
 </body>
 </html>
-```
