@@ -22,7 +22,7 @@
   <meta property="og:description" content="Iniziative culturali, gastronomiche e di valorizzazione del territorio a Santa Cristina e Bissone (PV)." />
   <meta property="og:image" content="https://prolocoscb.github.io/logo.png" />
 
-  <!-- Dati Strutturati JSON-LD (WebSite + Organization per Nome Sito e Logo su Google) -->
+  <!-- Dati Strutturati JSON-LD (WebSite + Organization per Nome Sito e Logo su Google - senza email in chiaro per antispam) -->
   <script type="application/ld+json">
   [
     {
@@ -44,7 +44,6 @@
         "width": 512,
         "height": 512
       },
-      "email": "prolocoscb.pv@proton.me",
       "taxID": "90010240183",
       "vatID": "IT03048290187",
       "founder": {
@@ -720,20 +719,20 @@
               </div>
             </div>
 
-            <!-- Blocco Recapiti Ufficiali (Stile Uniforme) -->
+            <!-- Blocco Recapiti Ufficiali (Ricostruiti dinamicamente via JS per antispam) -->
             <div class="rounded-xl bg-white/[0.045] border border-white/15 p-3.5 space-y-2.5">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] uppercase tracking-widest text-white/55 shrink-0">Email</span>
-                <a href="mailto:prolocoscb.pv@proton.me" class="font-mono text-[12px] font-medium text-platano-light hover:text-white no-underline transition truncate">
-                  prolocoscb.pv@proton.me
-                </a>
+                <span id="about-email-slot" class="font-mono text-[12px] font-medium text-platano-light truncate">
+                  <noscript>Attiva JavaScript</noscript>
+                </span>
               </div>
               <div class="h-[1px] bg-white/10"></div>
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] uppercase tracking-widest text-white/55 shrink-0">PEC</span>
-                <a href="mailto:prolocoscb.pv@ionospec.it" class="font-mono text-[12px] font-medium text-platano-light hover:text-white no-underline transition truncate">
-                  prolocoscb.pv@ionospec.it
-                </a>
+                <span id="about-pec-slot" class="font-mono text-[12px] font-medium text-platano-light truncate">
+                  <noscript>Attiva JavaScript</noscript>
+                </span>
               </div>
             </div>
           </div>
@@ -959,15 +958,15 @@
             </p>
           </div>
 
-          <form id="proloco-contact-form" action="https://formsubmit.co/prolocoscb.pv@proton.me" method="POST" class="space-y-3">
+          <form id="proloco-contact-form" method="POST" class="space-y-3">
             <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Pro Loco Santa Cristina e Bissone" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
 
             <div class="popup-stagger popup-stagger-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label for="sender-name" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Nome o Cognome</label>
-                <input id="sender-name" name="Nome" type="text" required placeholder="Il tuo nome"
+                <label for="sender-name" class="block text-[10px] uppercase tracking-widest text-white/70 mb-1">Nome e Cognome</label>
+                <input id="sender-name" name="Nome e Cognome" type="text" required placeholder="Mario Rossi"
                        class="form-input w-full rounded-xl px-3.5 py-2 text-xs sm:text-sm" />
               </div>
               <div>
@@ -1004,7 +1003,7 @@
             </div>
 
             <div class="popup-stagger popup-stagger-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-              <span class="text-[11px] text-white/60">Destinatario: prolocoscb.pv@proton.me</span>
+              <span class="text-[11px] text-white/60">Destinatario: <span id="write-recipient-slot" class="text-white/80"></span></span>
               <button type="submit" id="submit-contact-btn"
                       class="cta-btn bg-gradient-to-r from-platano-dark to-platano-light hover:brightness-110 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-full cursor-pointer shrink-0">
                 Invia messaggio
@@ -1023,7 +1022,7 @@
     </div>
   </div>
 
-  <!-- Popup Informativa Privacy (Art. 13 GDPR) -->
+  <!-- Popup Informativa Privacy (Art. 13 GDPR - Aggiornato con GitHub Pages & FormSubmit) -->
   <div id="privacy-popup" class="apple-backdrop fixed inset-0 z-[60] flex items-center justify-center p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="privacy-title">
     <div class="apple-popup-card rounded-2xl max-w-xl w-full p-5 sm:p-7 relative text-white my-auto text-left">
       <button type="button" onclick="togglePrivacyPopup(false)" class="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 text-white/70 hover:text-white p-1.5 rounded-full hover:bg-white/10 active:scale-90 transition cursor-pointer" aria-label="Chiudi informativa">
@@ -1038,19 +1037,19 @@
       <div class="space-y-3 text-xs sm:text-[13px] text-white/85 font-light leading-relaxed max-h-[60vh] overflow-y-auto custom-scroll pr-1">
         <p>
           <strong class="font-semibold text-white">1. Titolare del trattamento:</strong><br />
-          <strong>Pro Loco di Santa Cristina e Bissone</strong> (Associazione non riconosciuta), con sede legale in Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV) — C.F. 90010240183 — P.IVA 03048290187 — Email: <span class="text-platano-light">prolocoscb.pv@proton.me</span> — PEC: <span class="text-white">prolocoscb.pv@ionospec.it</span>.
+          <strong>Pro Loco di Santa Cristina e Bissone</strong> (Associazione non riconosciuta), con sede legale in Via Vittorio Veneto 5, 27010 Santa Cristina e Bissone (PV) — C.F. 90010240183 — P.IVA 03048290187 — Email: <span id="privacy-email-slot-1" class="text-platano-light"></span> — PEC: <span id="privacy-pec-slot-1" class="text-white"></span>.
         </p>
         <p>
-          <strong class="font-semibold text-white">2. Tipologia di dati raccolti, cookie e font:</strong><br />
-          Questo sito <strong>non installa cookie</strong> di alcun tipo (né tecnici, né analitici, né di profilazione) e non utilizza Google Fonts: i caratteri tipografici sono erogati tramite <em>Bunny Fonts</em> (infrastruttura europea conforme al GDPR senza tracciamento degli indirizzi IP). Attraverso il modulo <em>“Scrivici”</em> vengono raccolti esclusivamente i dati volontariamente inseriti dall’utente (nome, indirizzo email, motivo del contatto e messaggio) al solo fine di rispondere alle richieste, valutare proposte o gestire la disponibilità dei volontari.
+          <strong class="font-semibold text-white">2. Tipologia di dati raccolti, hosting, cookie e font:</strong><br />
+          Questo sito <strong>non installa cookie</strong> di alcun tipo (né tecnici, né analitici, né di profilazione) e non utilizza Google Fonts: i caratteri tipografici sono erogati tramite <em>Bunny Fonts</em> (infrastruttura europea conforme al GDPR senza tracciamento degli indirizzi IP). Il portale statico è ospitato sull’infrastruttura <em>GitHub Pages</em> fornita da <strong>GitHub Inc. (Microsoft Corporation)</strong>, i cui server possono registrare tecnicamente nei log di sicurezza l’indirizzo IP e i metadati della richiesta HTTP per garantire la continuità e la protezione del servizio (legittimo interesse, art. 6, par. 1, lett. f GDPR). Attraverso il modulo <em>“Scrivici”</em> vengono raccolti esclusivamente i dati volontariamente inseriti dall’utente (nome, indirizzo email, motivo del contatto e messaggio) al solo fine di rispondere alle richieste, valutare proposte o gestire la disponibilità dei volontari.
         </p>
         <p>
-          <strong class="font-semibold text-white">3. Base giuridica e modalità di invio:</strong><br />
-          Il trattamento si basa sul consenso esplicito dell’interessato (art. 6, par. 1, lett. a del Regolamento UE 2016/679). L’inoltro tecnico del modulo verso la casella email della Pro Loco avviene tramite il servizio <em>FormSubmit</em>; i dati non vengono ceduti a terzi né utilizzati per finalità commerciali.
+          <strong class="font-semibold text-white">3. Base giuridica, destinatari e trasferimenti extra-UE:</strong><br />
+          Il trattamento dei dati inviati tramite il modulo si basa sul consenso esplicito dell’interessato (art. 6, par. 1, lett. a del Regolamento UE 2016/679). I dati non vengono diffusi né ceduti a terzi per finalità commerciali. Per l’erogazione tecnica del sito (<em>GitHub Pages</em>) e l’instradamento dei messaggi verso la casella email della Pro Loco (<em>FormSubmit</em>), l’Associazione si avvale di fornitori tecnici con infrastruttura negli Stati Uniti; tali trasferimenti avvengono nel rispetto delle garanzie previste dal Capo V del GDPR (Decisione di adeguatezza <em>EU-US Data Privacy Framework</em> e/o Clausole Contrattuali Standard).
         </p>
         <p>
           <strong class="font-semibold text-white">4. Conservazione e diritti dell’interessato:</strong><br />
-          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile esercitare i diritti previsti dagli artt. 15–22 del GDPR (accesso, rettifica, cancellazione, limitazione) scrivendo a <span class="text-platano-light">prolocoscb.pv@proton.me</span> o alla PEC <span class="text-white">prolocoscb.pv@ionospec.it</span>.
+          I dati vengono conservati per il tempo strettamente necessario a evadere la richiesta. In qualsiasi momento è possibile esercitare i diritti previsti dagli artt. 15–22 del GDPR (accesso, rettifica, cancellazione, limitazione, opposizione) scrivendo a <span id="privacy-email-slot-2" class="text-platano-light"></span> o alla PEC <span id="privacy-pec-slot-2" class="text-white"></span>, fatto salvo il diritto di proporre reclamo all’Autorità Garante per la protezione dei dati personali.
         </p>
       </div>
 
@@ -1063,6 +1062,56 @@
   </div>
 
   <script>
+    // 1. Ricostruzione dinamica degli indirizzi Email e PEC per protezione antispam (Punto C)
+    const CONTACT_USER = 'prolocoscb.pv';
+    const EMAIL_DOMAIN = 'proton.me';
+    const PEC_DOMAIN = 'ionospec.it';
+    const OFFICIAL_EMAIL = `${CONTACT_USER}@${EMAIL_DOMAIN}`;
+    const OFFICIAL_PEC = `${CONTACT_USER}@${PEC_DOMAIN}`;
+
+    (function hydrateProtectedContacts() {
+      function makeMailAnchor(addr, className) {
+        const a = document.createElement('a');
+        a.href = `mai` + `lto:${addr}`;
+        a.textContent = addr;
+        a.className = className;
+        return a;
+      }
+
+      const aboutEmail = document.getElementById('about-email-slot');
+      if (aboutEmail) {
+        aboutEmail.innerHTML = '';
+        aboutEmail.appendChild(makeMailAnchor(OFFICIAL_EMAIL, 'hover:text-white no-underline transition'));
+      }
+
+      const aboutPec = document.getElementById('about-pec-slot');
+      if (aboutPec) {
+        aboutPec.innerHTML = '';
+        aboutPec.appendChild(makeMailAnchor(OFFICIAL_PEC, 'hover:text-white no-underline transition'));
+      }
+
+      const writeRecipient = document.getElementById('write-recipient-slot');
+      if (writeRecipient) {
+        writeRecipient.textContent = OFFICIAL_EMAIL;
+      }
+
+      ['privacy-email-slot-1', 'privacy-email-slot-2'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = OFFICIAL_EMAIL;
+      });
+
+      ['privacy-pec-slot-1', 'privacy-pec-slot-2'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = OFFICIAL_PEC;
+      });
+
+      // Imposta dinamicamente l'action del form senza esporre l'email in chiaro nel sorgente HTML
+      const formEl = document.getElementById('proloco-contact-form');
+      if (formEl) {
+        formEl.setAttribute('action', `https://formsubmit.co/${OFFICIAL_EMAIL}`);
+      }
+    })();
+
     const slidesData = [
       {
         image: 'IMG_0119.jpeg',
@@ -1414,7 +1463,7 @@
 
       try {
         const formData = new FormData(contactForm);
-        const response = await fetch('https://formsubmit.co/ajax/prolocoscb.pv@proton.me', {
+        const response = await fetch(`https://formsubmit.co/ajax/${OFFICIAL_EMAIL}`, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: formData
@@ -1430,7 +1479,7 @@
         }
       } catch (err) {
         feedbackEl.className = 'mt-3 rounded-xl px-3.5 py-2.5 text-xs leading-relaxed bg-red-950/75 border border-red-400/50 text-white';
-        feedbackEl.textContent = 'Non è stato possibile inviare il messaggio ora. Puoi scriverci direttamente a prolocoscb.pv@proton.me.';
+        feedbackEl.textContent = `Non è stato possibile inviare il messaggio ora. Puoi scriverci direttamente a ${OFFICIAL_EMAIL}.`;
         feedbackEl.classList.remove('hidden');
       } finally {
         submitBtn.disabled = false;
