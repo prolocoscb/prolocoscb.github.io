@@ -282,12 +282,36 @@
       inset: 0;
       background-size: cover;
       background-position: center;
+      filter: brightness(0.76) contrast(1.06);
       opacity: 0;
       z-index: 1;
       transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform, opacity;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+    }
+
+    .slide-bg.active {
+      opacity: 1;
+      z-index: 2;
+      animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    .slide-bg.exiting {
+      opacity: 0;
+      z-index: 3;
+      animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    /* Atmosfera Invernale & Natalizia con vignettatura ad alto contrasto per massima leggibilità */
+    .cinematic-overlay {
+      background:
+        radial-gradient(circle at 50% 44%, rgba(212, 175, 55, 0.08) 0%, rgba(0, 14, 38, 0.74) 48%, rgba(0, 8, 22, 0.97) 100%),
+        linear-gradient(180deg, rgba(0, 10, 28, 0.90) 0%, rgba(2, 18, 46, 0.62) 46%, rgba(0, 8, 22, 0.97) 100%);
+    }
+
+    .hero-text-shadow {
+      text-shadow: 0 4px 28px rgba(0, 8, 22, 0.98), 0 2px 10px rgba(0, 0, 0, 0.92);
     }
 
     .slide-bg.active {
