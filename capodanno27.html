@@ -696,7 +696,7 @@
             Chi siamo
           </span>
           <span class="text-[11px] font-normal text-white/85 group-hover:text-white mt-0.5 transition-colors">
-            <span class="underline decoration-platano-light/75 group-hover:decoration-platano-light underline-offset-[3px]">Dati, sede e direttivo</span><svg class="inline-block align-[-2px] ml-1 w-3 h-3 text-platano-light shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            <span class="underline decoration-platano-light/75 group-hover:decoration-platano-light underline-offset-[3px]">Dati, sede e direttivo</span><svg class="hidden sm:inline-block align-[-2px] ml-1 w-3 h-3 text-platano-light shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
           </span>
         </span>
       </button>
@@ -869,25 +869,25 @@
               <h2 id="view-event-title" class="font-serif text-[23px] sm:text-[34px] tracking-wide text-white leading-tight font-medium">
                 CENONE DI CAPODANNO <span class="text-platano-gold font-semibold">2027</span>
               </h2>
-            </div>
-
-            <!-- Barra Info Compatta Integrata nel Bordo Inferiore dell'Header -->
-            <div class="bg-gradient-to-t from-[#00112B] via-[#00112B]/95 to-transparent px-4 sm:px-7 pt-3 pb-2 -mt-4 sm:-mt-5 relative z-10 flex flex-wrap items-center justify-between gap-1.5 sm:gap-2">
-              <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                <span class="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] uppercase tracking-[0.10em] sm:tracking-[0.12em] font-bold px-2.5 py-1 rounded-full bg-platano-gold/20 text-platano-goldLight border border-platano-gold/45">
-                  31 Dic 2026 • Ore 20:00
+            <!-- Barra Info Dinamica: affiancati Data + Maps su mobile, tutti su 1 riga su tablet/desktop -->
+            <div class="bg-gradient-to-t from-[#00112B] via-[#00112B]/95 to-transparent px-4 sm:px-7 pt-3 pb-2 -mt-4 sm:-mt-5 relative z-10 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-1.5 sm:gap-2">
+              <div class="flex items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+                <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] uppercase tracking-[0.06em] sm:tracking-[0.12em] font-bold px-2 sm:px-2.5 py-1 rounded-full bg-platano-gold/20 text-platano-goldLight border border-platano-gold/45 whitespace-nowrap shrink-0">
+                  31 Dic 2026 <span class="hidden xs:inline sm:inline">•</span> 20:00
                 </span>
 
                 <a href="https://www.google.com/maps/search/?api=1&query=Via+Gradi%2C+27010+Santa+Cristina+e+Bissone+PV"
                    target="_blank" rel="noopener noreferrer"
                    title="Palestra Comunale (Via Gradi) — Apri su Google Maps"
-                   class="inline-flex items-center gap-1.5 text-[11px] font-medium text-white hover:text-platano-goldLight bg-navy-dark/85 hover:bg-platano-gold/20 border border-white/20 hover:border-platano-gold/50 px-2.5 py-1 rounded-full transition group">
-                  <svg class="w-3.5 h-3.5 text-platano-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                  <span>Palestra Comunale <span class="hidden sm:inline">(Via Gradi)</span></span>
-                  <span class="text-[10.5px] sm:text-[11px] uppercase tracking-wider text-platano-goldLight font-bold pl-1.5 border-l border-white/20 inline-flex items-center gap-0.5">
+                   class="inline-flex items-center justify-between sm:justify-start gap-1 sm:gap-1.5 text-[10.5px] sm:text-[11px] font-medium text-white hover:text-platano-goldLight bg-navy-dark/85 hover:bg-platano-gold/20 border border-white/20 hover:border-platano-gold/50 px-2 sm:px-2.5 py-1 rounded-full transition group min-w-0 flex-1 sm:flex-initial">
+                  <span class="inline-flex items-center gap-1 min-w-0">
+                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-platano-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span class="truncate">Palestra Comunale <span class="hidden sm:inline">(Via Gradi)</span></span>
+                  </span>
+                  <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-platano-goldLight font-bold pl-1 sm:pl-1.5 border-l border-white/20 inline-flex items-center gap-0.5 shrink-0">
                     Maps
                     <svg class="w-2.5 h-2.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10" />
