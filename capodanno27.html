@@ -282,7 +282,7 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      filter: brightness(0.76) contrast(1.06);
+      filter: brightness(0.56) contrast(1.08);
       opacity: 0;
       z-index: 1;
       transition: opacity 2.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -306,39 +306,16 @@
     /* Atmosfera Invernale & Natalizia con vignettatura ad alto contrasto per massima leggibilità */
     .cinematic-overlay {
       background:
-        radial-gradient(circle at 50% 44%, rgba(212, 175, 55, 0.08) 0%, rgba(0, 14, 38, 0.74) 48%, rgba(0, 8, 22, 0.97) 100%),
-        linear-gradient(180deg, rgba(0, 10, 28, 0.90) 0%, rgba(2, 18, 46, 0.62) 46%, rgba(0, 8, 22, 0.97) 100%);
+        radial-gradient(circle at 50% 44%, rgba(0, 12, 34, 0.56) 0%, rgba(0, 10, 28, 0.84) 52%, rgba(0, 6, 18, 0.98) 100%),
+        linear-gradient(180deg, rgba(0, 8, 22, 0.92) 0%, rgba(1, 14, 38, 0.72) 48%, rgba(0, 6, 18, 0.98) 100%);
     }
 
     .hero-text-shadow {
-      text-shadow: 0 4px 28px rgba(0, 8, 22, 0.98), 0 2px 10px rgba(0, 0, 0, 0.92);
-    }
-
-    .slide-bg.active {
-      opacity: 1;
-      z-index: 2;
-      animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-    }
-
-    .slide-bg.exiting {
-      opacity: 0;
-      z-index: 3;
-      animation: kenBurnsSlow 16s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-    }
-
-    /* Atmosfera Invernale & Natalizia con bagliore caldo dorato al centro */
-    .cinematic-overlay {
-      background:
-        radial-gradient(circle at 50% 44%, rgba(212, 175, 55, 0.11) 0%, rgba(0, 17, 43, 0.62) 48%, rgba(0, 11, 28, 0.96) 100%),
-        linear-gradient(180deg, rgba(0, 12, 34, 0.86) 0%, rgba(4, 26, 62, 0.44) 46%, rgba(0, 10, 26, 0.96) 100%);
-    }
-
-    .hero-text-shadow {
-      text-shadow: 0 4px 26px rgba(0, 11, 28, 0.94), 0 2px 8px rgba(0, 0, 0, 0.85);
+      text-shadow: 0 4px 28px rgba(0, 6, 18, 0.98), 0 2px 12px rgba(0, 0, 0, 0.96);
     }
 
     .body-text-shadow {
-      text-shadow: 0 2px 14px rgba(0, 11, 28, 0.95), 0 1px 3px rgba(0, 0, 0, 0.9);
+      text-shadow: 0 2px 16px rgba(0, 6, 18, 0.98), 0 1px 6px rgba(0, 0, 0, 0.95);
     }
 
     .hero-title-kicker {
@@ -718,11 +695,8 @@
           <span class="text-[13px] sm:text-sm font-semibold tracking-wide text-white group-hover:text-platano-goldLight transition-colors">
             Chi siamo
           </span>
-          <span class="inline-flex items-center gap-1 text-[11px] font-normal text-white/85 group-hover:text-white mt-0.5 transition-colors">
-            <span class="underline decoration-platano-light/75 group-hover:decoration-platano-light underline-offset-[3px]">Dati, sede e direttivo</span>
-            <svg class="w-3 h-3 text-platano-light shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
+          <span class="text-[11px] font-normal text-white/85 group-hover:text-white mt-0.5 transition-colors">
+            <span class="underline decoration-platano-light/75 group-hover:decoration-platano-light underline-offset-[3px]">Dati, sede e direttivo</span><svg class="inline-block align-[-2px] ml-1 w-3 h-3 text-platano-light shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
           </span>
         </span>
       </button>
@@ -1127,12 +1101,17 @@
           </div>
 
           <!-- Footer Scheda Evento -->
-          <div class="popup-stagger popup-stagger-3 mt-4 pt-3.5 pb-2 sm:pb-1 border-t border-white/15 flex flex-wrap items-center justify-between gap-2.5">
+          <div class="popup-stagger popup-stagger-3 mt-4 pt-3.5 pb-2 sm:pb-1 border-t border-white/15 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+            <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
+              <button type="button" onclick="shareCapodanno27()" id="share-capodanno-btn"
+                      class="cta-btn bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-xs px-3.5 py-2.5 rounded-full inline-flex items-center justify-center gap-1.5 transition cursor-pointer">
+                <svg class="w-3.5 h-3.5 text-platano-light shrink-0" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                 </svg>
                 <span id="share-capodanno-label">Condividi</span>
               </button>
               <button type="button" onclick="morphPopupView('write', 'Informazioni Cenone di Capodanno 2027', 'event')"
-                      class="cta-btn bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-xs px-3.5 py-2.5 rounded-full inline-flex items-center gap-1.5 transition cursor-pointer">
+                      class="cta-btn bg-white/10 hover:bg-white/20 border border-white/20 text-white font-medium text-xs px-3.5 py-2.5 rounded-full inline-flex items-center justify-center gap-1.5 transition cursor-pointer">
                 <svg class="w-3.5 h-3.5 text-platano-goldLight shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -1140,7 +1119,7 @@
               </button>
             </div>
             <button type="button" onclick="closeMainPopup()"
-                    class="cta-btn gold-event-btn font-bold text-xs px-5 py-2.5 rounded-full transition cursor-pointer ml-auto sm:ml-0">
+                    class="cta-btn gold-event-btn font-bold text-xs px-6 py-2.5 rounded-full inline-flex items-center justify-center transition cursor-pointer w-full sm:w-auto">
               Chiudi
             </button>
           </div>
