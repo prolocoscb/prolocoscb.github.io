@@ -2110,6 +2110,12 @@
       const popup = document.getElementById('main-popup');
       if (!popup || !popup.classList.contains('is-open') || popup.classList.contains('is-closing')) return;
 
+      // Se l'utente è arrivato a "Scrivici" da "Chiedi info" nella scheda Capodanno, chiudendo torna alla scheda evento
+      if (currentMainView === 'write' && previousViewForWrite === 'event') {
+        morphPopupView('event');
+        return;
+      }
+
       clearMorphTimers();
       if (modalTimers['main-popup']) {
         clearTimeout(modalTimers['main-popup']);
