@@ -531,32 +531,73 @@
       box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.26);
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translate3d(0, 22px, 0); }
-      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    /* Coreografia di ingresso Apple-style (curva spring fluida + micro-blur + scala morbida) */
+    @keyframes appleHeroRise {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0) scale3d(0.985, 0.985, 1);
+        filter: blur(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+        filter: blur(0);
+      }
     }
-    .animate-fade-up { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-    .delay-120 { animation-delay: 0.12s; opacity: 0; }
-    .delay-340 { animation-delay: 0.48s; opacity: 0; }
-    .delay-460 { animation-delay: 0.62s; opacity: 0; }
 
-    @keyframes titleReveal {
-      from { opacity: 0; transform: translate3d(0, 105%, 0); }
-      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    @keyframes appleHeaderDrop {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, -10px, 0);
+        filter: blur(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        filter: blur(0);
+      }
     }
+
+    @keyframes appleTitleFloat {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 22px, 0) scale3d(0.975, 0.975, 1);
+        filter: blur(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+        filter: blur(0);
+      }
+    }
+
+    .apple-enter-header {
+      animation: appleHeaderDrop 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both;
+      will-change: transform, opacity, filter;
+    }
+
+    .animate-fade-up {
+      animation: appleHeroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+      will-change: transform, opacity, filter;
+    }
+    .delay-120 { animation-delay: 0.14s; }
+    .delay-340 { animation-delay: 0.44s; }
+    .delay-460 { animation-delay: 0.56s; }
+    .delay-footer { animation-delay: 0.66s; }
+
     .title-mask {
-      overflow: hidden;
-      padding-bottom: 0.08em;
+      overflow: visible;
+      padding-bottom: 0.06em;
     }
     .title-reveal-1 {
       display: block;
-      animation: titleReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
-      opacity: 0;
+      animation: appleTitleFloat 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+      will-change: transform, opacity, filter;
     }
     .title-reveal-2 {
       display: block;
-      animation: titleReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.32s forwards;
-      opacity: 0;
+      animation: appleTitleFloat 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+      will-change: transform, opacity, filter;
     }
 
     @keyframes expandLine {
@@ -569,17 +610,14 @@
     }
     .divider-line-left {
       transform-origin: right center;
-      animation: expandLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
-      opacity: 0;
+      animation: expandLine 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
     }
     .divider-line-right {
       transform-origin: left center;
-      animation: expandLine 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
-      opacity: 0;
+      animation: expandLine 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
     }
     .divider-diamond {
-      animation: spinDiamond 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
-      opacity: 0;
+      animation: spinDiamond 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
     }
 
     @keyframes dotProgress {
@@ -629,7 +667,7 @@
   <div id="swipe-area" class="app-shell relative z-20 flex flex-col justify-between gap-6 w-full max-w-7xl mx-auto">
 
     <!-- Header con pt-2 per dare respiro al cappello di Babbo Natale -->
-    <header class="pt-2 flex items-center justify-between gap-3 sm:gap-4 animate-fade-up">
+    <header class="pt-2 flex items-center justify-between gap-3 sm:gap-4 apple-enter-header">
       <!-- Angolo in alto a sx: Logo con Corona Dorata Invernale + Cappello Natalizio + "Chi siamo" -->
       <button type="button" onclick="openMainPopup('about')" aria-label="Informazioni sull'associazione, dati fiscali e organi sociali"
               class="inline-flex items-center gap-2.5 sm:gap-3.5 text-left cursor-pointer group rounded-xl py-0.5 pr-1 transition active:scale-[0.98]">
@@ -806,7 +844,7 @@
     </main>
 
     <!-- Footer: Didascalia Vista Aerea, Indicatori Slide & Dati Legali Obbligatori -->
-    <footer class="flex flex-col gap-3.5 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-460 body-text-shadow">
+    <footer class="flex flex-col gap-3.5 pt-3.5 sm:pt-4 border-t border-white/15 animate-fade-up delay-footer body-text-shadow">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
         <!-- Didascalia Luogo -->
         <div class="flex items-center gap-2.5 sm:gap-3 text-center sm:text-left">
@@ -859,53 +897,51 @@
       <div id="morph-body" class="morph-body flex-1 min-h-0 flex flex-col">
         <!-- Vista 0: Evento Cenone di Capodanno 2027 -->
         <div id="view-event" class="modal-view-panel flex-1 min-h-0 flex flex-col">
-          <!-- Header Tipografico Evento Compatto su Mobile -->
+          <!-- Header Tipografico Evento Simmetrico (X bilanciata da padding orizzontale uguale su entrambi i lati) -->
           <div class="popup-stagger popup-stagger-1 shrink-0 -mx-4 -mt-4 sm:-mx-7 sm:-mt-7 mb-2.5 sm:mb-3.5 relative overflow-hidden border-b border-platano-gold/35 bg-gradient-to-br from-[#2B161B] via-[#1C2130] to-[#0E192E]">
-            <div class="pt-4 pb-3.5 sm:pt-6 sm:pb-4 px-4 sm:px-6 pr-12 text-center relative">
-              <span class="inline-flex items-center gap-1.5 text-[10px] sm:text-xs uppercase tracking-[0.24em] sm:tracking-[0.28em] text-platano-goldLight mb-0.5 sm:mb-1">
+            <div class="pt-4 pb-3.5 sm:pt-6 sm:pb-4 px-11 sm:px-14 text-center relative">
+              <span class="inline-flex items-center justify-center gap-1.5 text-[9.5px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.28em] text-platano-goldLight mb-0.5 sm:mb-1 leading-tight">
                 <span aria-hidden="true">✦</span>
                 <span>Pro Loco Santa Cristina e Bissone</span>
                 <span aria-hidden="true">✦</span>
               </span>
-              <h2 id="view-event-title" class="font-serif text-[23px] sm:text-[34px] tracking-wide text-white leading-tight font-medium">
+              <h2 id="view-event-title" class="font-serif text-[22px] sm:text-[34px] tracking-wide text-white leading-tight font-medium">
                 CENONE DI CAPODANNO <span class="font-display font-bold tracking-[0.06em] bg-gradient-to-b from-[#FFF3C4] via-[#F3D982] to-[#C89B2B] bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)]">2027</span>
               </h2>
             </div>
-            <!-- Barra Info Dinamica: affiancati Data + Maps su mobile, tutti su 1 riga su tablet/desktop -->
-            <div class="bg-[#00112B]/80 border-t border-white/10 px-4 sm:px-7 py-2.5 relative z-10 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-1.5 sm:gap-2">
-              <div class="flex items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
-                <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] uppercase tracking-[0.06em] sm:tracking-[0.12em] font-bold px-2 sm:px-2.5 py-1 rounded-full bg-platano-gold/20 text-platano-goldLight border border-platano-gold/45 whitespace-nowrap shrink-0">
-                  31 Dic 2026 <span class="hidden xs:inline sm:inline">•</span> 20:00
+            <!-- Barra Info Dinamica Compatta: pill proporzionati senza allungamenti su Android/iOS -->
+            <div class="bg-[#00112B]/80 border-t border-white/10 px-4 sm:px-7 py-2.5 relative z-10 flex flex-wrap items-center justify-center sm:justify-between gap-1.5 sm:gap-2">
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2">
+                <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] uppercase tracking-[0.06em] sm:tracking-[0.12em] font-bold px-2.5 py-1 rounded-full bg-platano-gold/20 text-platano-goldLight border border-platano-gold/45 whitespace-nowrap">
+                  31 Dic 2026 • 20:00
                 </span>
 
                 <a href="https://www.google.com/maps/search/?api=1&query=Via+Gradi%2C+27010+Santa+Cristina+e+Bissone+PV"
                    target="_blank" rel="noopener noreferrer"
                    title="Palestra Comunale (Via Gradi) — Apri su Google Maps"
-                   class="inline-flex items-center justify-between sm:justify-start gap-1 sm:gap-1.5 text-[10.5px] sm:text-[11px] font-medium text-white hover:text-platano-goldLight bg-navy-dark/90 hover:bg-platano-gold/20 border border-white/20 hover:border-platano-gold/50 px-2 sm:px-2.5 py-1 rounded-full transition group min-w-0 flex-1 sm:flex-initial">
-                  <span class="inline-flex items-center gap-1 min-w-0">
-                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-platano-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                    <span class="truncate">Palestra Comunale <span class="hidden sm:inline">(Via Gradi)</span></span>
-                  </span>
-                  <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-platano-goldLight font-bold pl-1 sm:pl-1.5 border-l border-white/20 inline-flex items-center gap-0.5 shrink-0">
+                   class="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-medium text-white hover:text-platano-goldLight bg-navy-dark/90 hover:bg-platano-gold/20 border border-white/20 hover:border-platano-gold/50 px-2.5 py-1 rounded-full transition group whitespace-nowrap">
+                  <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-platano-gold shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span>Palestra Comunale <span class="hidden md:inline">(Via Gradi)</span></span>
+                  <span class="text-[9.5px] sm:text-[10.5px] uppercase tracking-wider text-platano-goldLight font-bold pl-1.5 border-l border-white/20 inline-flex items-center gap-0.5">
                     Maps
                     <svg class="w-2.5 h-2.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10" />
                     </svg>
                   </span>
                 </a>
-              </div>
 
-              <button type="button" onclick="downloadCapodannoICS()"
-                      title="Salva promemoria nel calendario del telefono o computer"
-                      class="inline-flex items-center gap-1.5 text-[11px] font-medium text-white hover:text-emerald-200 bg-navy-dark/90 hover:bg-platano-light/20 border border-white/20 hover:border-platano-light/50 px-2.5 py-1 rounded-full transition cursor-pointer shrink-0">
-                <svg class="w-3.5 h-3.5 text-platano-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Salva data</span>
-              </button>
+                <button type="button" onclick="downloadCapodannoICS()"
+                        title="Salva promemoria nel calendario del telefono o computer"
+                        class="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-medium text-white hover:text-emerald-200 bg-navy-dark/90 hover:bg-platano-light/20 border border-white/20 hover:border-platano-light/50 px-2.5 py-1 rounded-full transition cursor-pointer whitespace-nowrap">
+                  <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-platano-light shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>Salva data</span>
+                </button>
+              </div>
             </div>
           </div>
 
